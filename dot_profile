@@ -1,0 +1,10 @@
+# ~/.profile: executed by Bourne-compatible login shells.
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    # shellcheck source=dot_bashrc
+    . ~/.bashrc
+  fi
+fi
+
+mesg n 2> /dev/null || true

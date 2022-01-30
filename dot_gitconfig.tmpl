@@ -1,0 +1,40 @@
+[user]
+    useConfigOnly = true
+[core]
+    editor = nano
+    excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+    autocrlf = input
+[pull]
+    ff = only
+[init]
+    defaultBranch = main
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    stu = status -uno
+    br = branch
+    rso = remote show origin
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    ######################
+    ssave = stash save
+    slist = stash list
+    speek = stash apply stash@{0}
+    ######################
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    fuckit = reset --hard HEAD
+    ######################
+    # Will clean up local branches, removing those that don't have a remote anymore (like merged after a PR).
+    # Won't remove branches that are ONLY in local.
+    prune-branches = "!git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
+    ######################
+
+[github]
+    user = zbiljic
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/

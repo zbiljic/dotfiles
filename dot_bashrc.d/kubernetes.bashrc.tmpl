@@ -1,0 +1,70 @@
+{{- if .kubernetes -}}
+#!/usr/bin/env bash
+
+##
+## Kubernetes
+##
+
+# Used to run kubectl shortly
+alias k="kubectl"
+# Used to get ...
+alias kg="kubectl get"
+# Used to get all pods
+alias kgp="kubectl get pods"
+# Used to get all pods with watching
+alias kgpw="watch kubectl get pods"
+
+# Used to create a resource
+kc() {
+  kubectl create -f "$1"
+}
+
+# Used to delete a resource
+kd() {
+  kubectl delete -f "$1"
+}
+
+# Used to re-create a resource
+# (Not replace or apply, juste re-create)
+kr() {
+  kubectl delete -f "$1"
+  kubectl create -f "$1"
+}
+
+# Used to kill a pod now!
+kpk() {
+  ns="default"
+  if [ -z "$2" ]; then
+    ns=$2
+  fi
+  kubectl delete pod "$1" --grace-period=0 --force --namespace="$ns"
+}
+
+# Used to exec in a pod
+kpe() {
+  ns="default"
+  if [ -z "$3" ]; then
+    ns=$3
+  fi
+  kubectl exec -it "$1" -c "$2" --namespace="$ns"
+}
+
+# Used to find a pod name
+kpf() {
+  ns="default"
+  if [ -z "$2" ]; then
+    ns=$2
+  fi
+  kubectl get pods --namespace="$ns" | grep "$1" | awk '{print $1}'
+}
+
+# Used to display and follow pod logs
+kpl() {
+  ns="default"
+  if [ -z "$3" ]; then
+    ns=$3
+  fi
+  kubectl logs "$1" -c "$2" --namespace="$ns" -f
+}
+
+{{- end -}}

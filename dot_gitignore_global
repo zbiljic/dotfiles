@@ -1,0 +1,8 @@
+*~
+.DS_Store
+.vscode/
+
+*__*
+.env
+.bin/
+modd.conf

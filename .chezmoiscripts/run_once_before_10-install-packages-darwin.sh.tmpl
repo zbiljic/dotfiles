@@ -1,0 +1,49 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+if ! command -v brew > /dev/null 2>&1; then
+    echo "brew not found, installing..."
+    /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # activate brew env in this script
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+{{ $brews := list
+    "bash"
+    "curl"
+    "ffmpeg"
+    "git"
+    "go"
+    "jq"
+    "wget"
+    "yt-dlp"
+-}}
+
+{{ $casks := list
+    "iterm2"
+    "mpv"
+    "rectangle"
+    "visual-studio-code"
+    "zoom"
+-}}
+
+{{ if .personal -}}
+{{   $casks = concat $casks (list
+       "keepassxc"
+       "telegram"
+       "viber"
+     ) -}}
+{{ end -}}
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF
+
+{{- end -}}

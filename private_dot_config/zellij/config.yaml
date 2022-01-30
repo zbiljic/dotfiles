@@ -1,0 +1,17 @@
+default_shell: /bin/bash
+simplified_ui: true
+theme: dracula
+themes:
+  dracula:
+    bg: [40, 42, 54]
+    black: [0,0,0]
+    blue: [139, 233, 253] # Cyan
+    cyan: [139, 233, 253]
+    fg: [248, 248, 242]
+    gray: [68, 71, 90] # Selection
+    green: [80, 250, 123]
+    magenta: [255, 121, 198] # Pink
+    orange: [255, 184, 108]
+    red: [255, 85, 85]
+    white: [255, 255, 255]
+    yellow: [241, 250, 140]

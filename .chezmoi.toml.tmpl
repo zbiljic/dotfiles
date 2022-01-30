@@ -1,0 +1,55 @@
+{{/* boolean feature tags */}}
+{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
+{{- $kubernetes := false -}}{{/* true if this machine is used for Kubernetes work */}}
+{{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
+{{- "" -}}
+
+{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, and Vagrant boxes */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "vscode" "vagrant") -}}
+{{-   $headless = true -}}
+{{-   $ephemeral = true -}}
+{{- end -}}
+
+{{- $hostname := .chezmoi.hostname -}}
+
+{{- if not $ephemeral -}}
+{{-   if (hasPrefix "NAS" $hostname) -}}
+{{-     $headless = true -}}
+{{-     $personal = true -}}
+{{-   else if stdinIsATTY -}}
+{{-     if hasKey . "headless" -}}
+{{-       $headless = .headless -}}
+{{-     else -}}
+{{-       $headless = promptBool "headless" -}}
+{{-     end -}}
+{{-     if hasKey . "ephemeral" -}}
+{{-       $ephemeral = .ephemeral -}}
+{{-     else -}}
+{{-       $ephemeral = promptBool "ephemeral" -}}
+{{-     end -}}
+{{-     if hasKey . "kubernetes" -}}
+{{-       $kubernetes = .kubernetes -}}
+{{-     else -}}
+{{-       $kubernetes = promptBool "kubernetes" -}}
+{{-     end -}}
+{{-   else -}}
+{{-     $headless = true -}}
+{{-     $ephemeral = true -}}
+{{-   end -}}
+{{- end -}}
+
+{{- if (env "KUBERNETES") -}}
+{{-   $kubernetes = true -}}
+{{- end -}}
+
+{{- if (env "PERSONAL") -}}
+{{-   $personal = true -}}
+{{- end -}}
+
+[data]
+  headless = {{ $headless }}
+  hostname = {{ $hostname | quote }}
+  ephemeral = {{ $ephemeral }}
+  kubernetes = {{ $kubernetes }}
+  personal = {{ $personal }}
