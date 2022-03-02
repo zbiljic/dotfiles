@@ -84,7 +84,7 @@
 
 ## https://github.com/zellij-org/zellij
 ##
-{{ $zellij_version := "v0.24.0" }}
+{{ $zellij_version := "v0.25.0" }}
 {{ $zellij_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
 {{   $zellij_package = "zellij-x86_64-apple-darwin.tar.gz" }}
