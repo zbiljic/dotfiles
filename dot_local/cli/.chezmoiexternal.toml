@@ -1,3 +1,23 @@
+## https://github.com/schollz/croc
+##
+{{ $croc_version := "9.5.5" }}
+{{ $croc_package := "" }}
+{{- if (eq .chezmoi.os "darwin") }}
+{{   $croc_package = (printf "croc_%s_macOS-64bit.tar.gz" $croc_version) }}
+{{- end }}
+{{- if (eq .chezmoi.os "linux") }}
+{{   $croc_package = (printf "croc_%s_Linux-64bit.tar.gz" $croc_version) }}
+{{- end }}
+{{ $croc_url := (printf "https://github.com/schollz/croc/releases/download/v%s/%s" $croc_version $croc_package) }}
+
+{{ with $croc_package }}
+["croc"]
+    type = "archive"
+    url = "{{ $croc_url }}"
+    exact = true
+    refreshPeriod = "168h"
+{{ end }}
+
 ## https://github.com/ogham/exa
 ##
 {{ $exa_version := "v0.10.1" }}
