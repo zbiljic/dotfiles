@@ -102,6 +102,27 @@
     refreshPeriod = "168h"
 {{ end }}
 
+## https://github.com/ducaale/xh
+##
+{{ $xh_version := "v0.16.1" }}
+{{ $xh_package := "" }}
+{{- if (eq .chezmoi.os "darwin") }}
+{{   $xh_package = (printf "xh-%s-x86_64-apple-darwin.tar.gz" $xh_version) }}
+{{- end }}
+{{- if (eq .chezmoi.os "linux") }}
+{{   $xh_package = (printf "xh-%s-x86_64-unknown-linux-musl.tar.gz" $xh_version) }}
+{{- end }}
+{{ $xh_url := (printf "https://github.com/ducaale/xh/releases/download/%s/%s" $xh_version $xh_package) }}
+
+{{ with $xh_package }}
+["xh"]
+    type = "archive"
+    url = "{{ $xh_url }}"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{ end }}
+
 ## https://github.com/zellij-org/zellij
 ##
 {{ $zellij_version := "v0.31.4" }}
