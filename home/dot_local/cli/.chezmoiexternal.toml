@@ -62,7 +62,7 @@
 
 ## https://github.com/sharkdp/hexyl
 ##
-{{ $hexyl_version := "v0.9.0" }}
+{{ $hexyl_version := "v0.10.0" }}
 {{ $hexyl_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
 {{   $hexyl_package = (printf "hexyl-%s-x86_64-apple-darwin.tar.gz" $hexyl_version) }}
