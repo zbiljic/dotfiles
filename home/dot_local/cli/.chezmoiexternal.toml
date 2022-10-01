@@ -124,10 +124,10 @@
 
 ## https://github.com/bvaisvil/zenith
 ##
-{{ $zenith_version := "0.12.0" }}
+{{ $zenith_version := "0.13.1" }}
 {{ $zenith_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $zenith_package = "zenith.x86_64_MacOS.tgz" }}
+{{   $zenith_package = "zenith.x86_64-apple-darwin.tgz" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
 {{   $zenith_package = "zenith.x86_64-unknown-linux-musl.tgz" }}
@@ -139,5 +139,6 @@
     type = "archive"
     url = "{{ $zenith_url }}"
     exact = true
+    stripComponents = 1
     refreshPeriod = "168h"
 {{ end }}
