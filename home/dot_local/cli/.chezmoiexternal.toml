@@ -104,7 +104,7 @@
 
 ## https://github.com/ducaale/xh
 ##
-{{ $xh_version := "v0.16.1" }}
+{{ $xh_version := "v0.17.0" }}
 {{ $xh_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
 {{   $xh_package = (printf "xh-%s-x86_64-apple-darwin.tar.gz" $xh_version) }}
