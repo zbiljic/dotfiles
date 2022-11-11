@@ -1,6 +1,6 @@
 ## https://github.com/schollz/croc
 ##
-{{ $croc_version := "9.6.0" }}
+{{ $croc_version := "9.6.1" }}
 {{ $croc_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
 {{   $croc_package = (printf "croc_%s_macOS-64bit.tar.gz" $croc_version) }}
