@@ -1,6 +1,0 @@
-## https://github.com/dracula/zellij
-##
-["dracula.yaml"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/dracula/zellij/master/dracula.yaml"
-    refreshPeriod = "168h"
