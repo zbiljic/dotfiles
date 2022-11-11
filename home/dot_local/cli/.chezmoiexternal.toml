@@ -60,6 +60,27 @@
     refreshPeriod = "168h"
 {{ end }}
 
+## https://github.com/helix-editor/helix
+##
+{{ $helix_version := "22.08.1" }}
+{{ $helix_package := "" }}
+{{- if (eq .chezmoi.os "darwin") }}
+{{   $helix_package = (printf "helix-%s-x86_64-macos.tar.xz" $helix_version) }}
+{{- end }}
+{{- if (eq .chezmoi.os "linux") }}
+{{   $helix_package = (printf "helix-%s-x86_64-linux.tar.xz" $helix_version) }}
+{{- end }}
+{{ $helix_url := (printf "https://github.com/helix-editor/helix/releases/download/%s/%s" $helix_version $helix_package) }}
+
+{{ with $helix_package }}
+["helix"]
+    type = "archive"
+    url = "{{ $helix_url }}"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{ end }}
+
 ## https://github.com/sharkdp/hexyl
 ##
 {{ $hexyl_version := "v0.10.0" }}

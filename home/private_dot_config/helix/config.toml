@@ -1,0 +1,7 @@
+theme = "dracula"
+
+[editor]
+mouse = false
+
+[editor.file-picker]
+hidden = false
