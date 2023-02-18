@@ -1,0 +1,6 @@
+simplified_ui true
+{{- if eq .chezmoi.os "darwin" }}
+default_shell "/bin/zsh"
+{{- else if eq .chezmoi.os "linux" }}
+default_shell "/bin/bash"
+{{- end }}
