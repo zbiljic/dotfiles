@@ -1,1 +1,4 @@
-{{ .chezmoi.homeDir }}/.local/cli/hexyl/hexyl
+{{ $path := joinPath .chezmoi.homeDir ".local/cli/hexyl/hexyl" }}
+{{ if stat $path }}
+{{   $path }}
+{{ end }}
