@@ -1,9 +1,5 @@
-{{- if lookPath "exa" -}}
-
 alias e='exa -lag'
 alias ee='exa -abghHliS'
 alias et='exa -bghHliS -T -L 2'
 alias etr='exa -T'
 alias etra='exa -a -T'
-
-{{- end }}
