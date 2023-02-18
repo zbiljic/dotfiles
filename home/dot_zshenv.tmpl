@@ -20,6 +20,41 @@ export HOMEBREW_NO_ANALYTICS=1
 {{-   end }}
 {{- end }}
 
+{{- /* process extra files with environment variables */ -}}
+{{- $envFiles := glob (joinPath $homeDir ".local/env.d/*") }}
+{{- if $envFiles }}
+# Environment variable files:
+{{ end }}
+
+{{- range $_, $path := $envFiles }}
+{{-   $extras := list }}
+
+{{-   $lines := splitList "\n" (include $path) }}
+{{-   range $_, $line := $lines }}
+{{-     if contains "export PATH" $line }}
+{{- /* extract raw path */ -}}
+{{-       $p := $line }}
+{{-       $p = regexReplaceAll ":*\\$PATH:*" $p "" }}
+{{-       $p = regexReplaceAll "export\\s+PATH.*=" $p "" }}
+{{-       $p = trimAll "\"" $p }}
+{{-       $paths = mustAppend $paths $p }}
+{{-     else }}
+{{-       $extras = mustAppend $extras $line }}
+{{-     end }}
+{{-   end }}
+
+{{-   if gt (len $extras) 1 }}
+{{- /* write into file */}}
+##
+## {{ base $path | toString }}
+##
+{{-     range $_, $extraEnv := $extras }}
+{{        $extraEnv | toString }}
+{{-     end }}
+{{-   end }}
+
+{{- end }}
+
 ##
 ## PATH
 ##
