@@ -1,0 +1,6 @@
+{{ $path := joinPath .chezmoi.homeDir ".local/cli/zellij/zellij" }}
+{{- if or (stat $path) (lookPath "zellij") -}}
+#!/usr/bin/env bash
+
+zellij attach --create
+{{- end }}

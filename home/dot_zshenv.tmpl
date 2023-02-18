@@ -13,7 +13,7 @@ export HOMEBREW_NO_ANALYTICS=1
 {{- $paths := list }}
 
 {{- /* include special path directories */ -}}
-{{- range $_, $relPath := list ".local/bin" }}
+{{- range $_, $relPath := list ".local/bin" ".local/czbin" }}
 {{-   $path := joinPath $homeDir $relPath }}
 {{-   if stat $path }}
 {{-     $paths = mustAppend $paths $path }}
