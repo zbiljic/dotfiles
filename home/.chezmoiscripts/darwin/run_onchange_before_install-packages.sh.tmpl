@@ -1,4 +1,3 @@
-{{- if (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env bash
 
 set -eufo pipefail
@@ -45,5 +44,3 @@ brew "{{ . }}"
 cask "{{ . }}"
 {{ end -}}
 EOF
-
-{{- end -}}

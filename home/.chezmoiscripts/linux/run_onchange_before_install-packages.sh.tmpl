@@ -1,4 +1,3 @@
-{{- if (eq .chezmoi.os "linux") -}}
 {{ if (eq .chezmoi.osRelease.id "debian" "ubuntu") -}}
 
 {{ $packages := list -}}
@@ -18,4 +17,3 @@ set -eufo pipefail
 {{ end }}
 
 {{ end -}}
-{{- end -}}
