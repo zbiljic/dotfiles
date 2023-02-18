@@ -1,12 +1,23 @@
 ## https://github.com/schollz/croc
 ##
 {{ $croc_version := "9.6.1" }}
+{{ $croc_os := "" }}
+{{ $croc_arch := "" }}
 {{ $croc_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $croc_package = (printf "croc_%s_macOS-64bit.tar.gz" $croc_version) }}
+{{    $croc_os = "macOS" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $croc_package = (printf "croc_%s_Linux-64bit.tar.gz" $croc_version) }}
+{{    $croc_os = "Linux" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $croc_arch = "64bit" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "arm64") }}
+{{    $croc_arch = "ARM64" }}
+{{- end }}
+{{- if and (ne $croc_os "") (ne $croc_arch "") }}
+{{    $croc_package = (printf "croc_%s_%s-%s.tar.gz" $croc_version $croc_os $croc_arch) }}
 {{- end }}
 {{ $croc_url := (printf "https://github.com/schollz/croc/releases/download/v%s/%s" $croc_version $croc_package) }}
 
@@ -21,12 +32,20 @@
 ## https://github.com/ogham/exa
 ##
 {{ $exa_version := "v0.10.1" }}
+{{ $exa_os := "" }}
+{{ $exa_arch := "" }}
 {{ $exa_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $exa_package = (printf "exa-macos-x86_64-%s.zip" $exa_version) }}
+{{    $exa_os = "macos" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $exa_package = (printf "exa-linux-x86_64-musl-%s.zip" $exa_version) }}
+{{    $exa_os = "linux" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $exa_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $exa_os "") (ne $exa_arch "") }}
+{{    $exa_package = (printf "exa-%s-%s-%s.zip" $exa_os $exa_arch $exa_version) }}
 {{- end }}
 {{ $exa_url := (printf "https://github.com/ogham/exa/releases/download/%s/%s" $exa_version $exa_package) }}
 
@@ -42,12 +61,20 @@
 ## https://github.com/sharkdp/fd
 ##
 {{ $fd_version := "v8.5.2" }}
+{{ $fd_os := "" }}
+{{ $fd_arch := "" }}
 {{ $fd_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $fd_package = (printf "fd-%s-x86_64-apple-darwin.tar.gz" $fd_version) }}
+{{    $fd_os = "apple-darwin" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $fd_package = (printf "fd-%s-x86_64-unknown-linux-musl.tar.gz" $fd_version) }}
+{{    $fd_os = "unknown-linux-musl" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $fd_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $fd_os "") (ne $fd_arch "") }}
+{{    $fd_package = (printf "fd-%s-%s-%s.tar.gz" $fd_version $fd_arch $fd_os) }}
 {{- end }}
 {{ $fd_url := (printf "https://github.com/sharkdp/fd/releases/download/%s/%s" $fd_version $fd_package) }}
 
@@ -63,12 +90,20 @@
 ## https://github.com/helix-editor/helix
 ##
 {{ $helix_version := "22.08.1" }}
+{{ $helix_os := "" }}
+{{ $helix_arch := "" }}
 {{ $helix_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $helix_package = (printf "helix-%s-x86_64-macos.tar.xz" $helix_version) }}
+{{    $helix_os = "macos" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $helix_package = (printf "helix-%s-x86_64-linux.tar.xz" $helix_version) }}
+{{    $helix_os = "linux" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $helix_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $helix_os "") (ne $helix_arch "") }}
+{{    $helix_package = (printf "helix-%s-%s-%s.tar.xz" $helix_version $helix_arch $helix_os) }}
 {{- end }}
 {{ $helix_url := (printf "https://github.com/helix-editor/helix/releases/download/%s/%s" $helix_version $helix_package) }}
 
@@ -84,12 +119,20 @@
 ## https://github.com/sharkdp/hexyl
 ##
 {{ $hexyl_version := "v0.10.0" }}
+{{ $hexyl_os := "" }}
+{{ $hexyl_arch := "" }}
 {{ $hexyl_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $hexyl_package = (printf "hexyl-%s-x86_64-apple-darwin.tar.gz" $hexyl_version) }}
+{{    $hexyl_os = "apple-darwin" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $hexyl_package = (printf "hexyl-%s-x86_64-unknown-linux-musl.tar.gz" $hexyl_version) }}
+{{    $hexyl_os = "unknown-linux-musl" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $hexyl_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $hexyl_os "") (ne $hexyl_arch "") }}
+{{    $hexyl_package = (printf "hexyl-%s-%s-%s.tar.gz" $hexyl_version $hexyl_arch $hexyl_os) }}
 {{- end }}
 {{ $hexyl_url := (printf "https://github.com/sharkdp/hexyl/releases/download/%s/%s" $hexyl_version $hexyl_package) }}
 
@@ -105,12 +148,20 @@
 ## https://github.com/BurntSushi/ripgrep
 ##
 {{ $ripgrep_version := "13.0.0" }}
+{{ $ripgrep_os := "" }}
+{{ $ripgrep_arch := "" }}
 {{ $ripgrep_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $ripgrep_package = (printf "ripgrep-%s-x86_64-apple-darwin.tar.gz" $ripgrep_version) }}
+{{    $ripgrep_os = "apple-darwin" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $ripgrep_package = (printf "ripgrep-%s-x86_64-unknown-linux-musl.tar.gz" $ripgrep_version) }}
+{{    $ripgrep_os = "unknown-linux-musl" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $ripgrep_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $ripgrep_os "") (ne $ripgrep_arch "") }}
+{{    $ripgrep_package = (printf "ripgrep-%s-%s-%s.tar.gz" $ripgrep_version $ripgrep_arch $ripgrep_os) }}
 {{- end }}
 {{ $ripgrep_url := (printf "https://github.com/BurntSushi/ripgrep/releases/download/%s/%s" $ripgrep_version $ripgrep_package) }}
 
@@ -126,12 +177,20 @@
 ## https://github.com/ducaale/xh
 ##
 {{ $xh_version := "v0.17.0" }}
+{{ $xh_os := "" }}
+{{ $xh_arch := "" }}
 {{ $xh_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $xh_package = (printf "xh-%s-x86_64-apple-darwin.tar.gz" $xh_version) }}
+{{    $xh_os = "apple-darwin" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $xh_package = (printf "xh-%s-x86_64-unknown-linux-musl.tar.gz" $xh_version) }}
+{{    $xh_os = "unknown-linux-musl" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $xh_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $xh_os "") (ne $xh_arch "") }}
+{{    $xh_package = (printf "xh-%s-%s-%s.tar.gz" $xh_version $xh_arch $xh_os) }}
 {{- end }}
 {{ $xh_url := (printf "https://github.com/ducaale/xh/releases/download/%s/%s" $xh_version $xh_package) }}
 
@@ -147,12 +206,23 @@
 ## https://github.com/zellij-org/zellij
 ##
 {{ $zellij_version := "v0.33.0" }}
+{{ $zellij_os := "" }}
+{{ $zellij_arch := "" }}
 {{ $zellij_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $zellij_package = "zellij-x86_64-apple-darwin.tar.gz" }}
+{{    $zellij_os = "apple-darwin" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $zellij_package = "zellij-x86_64-unknown-linux-musl.tar.gz" }}
+{{    $zellij_os = "unknown-linux-musl" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $zellij_arch = "x86_64" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "arm64") }}
+{{    $zellij_arch = "aarch64" }}
+{{- end }}
+{{- if and (ne $zellij_os "") (ne $zellij_arch "") }}
+{{    $zellij_package = (printf "zellij-%s-%s.tar.gz" $zellij_arch $zellij_os) }}
 {{- end }}
 {{ $zellij_url := (printf "https://github.com/zellij-org/zellij/releases/download/%s/%s" $zellij_version $zellij_package) }}
 
@@ -167,12 +237,20 @@
 ## https://github.com/bvaisvil/zenith
 ##
 {{ $zenith_version := "0.13.1" }}
+{{ $zenith_os := "" }}
+{{ $zenith_arch := "" }}
 {{ $zenith_package := "" }}
 {{- if (eq .chezmoi.os "darwin") }}
-{{   $zenith_package = "zenith.x86_64-apple-darwin.tgz" }}
+{{    $zenith_os = "apple-darwin" }}
 {{- end }}
 {{- if (eq .chezmoi.os "linux") }}
-{{   $zenith_package = "zenith.x86_64-unknown-linux-musl.tgz" }}
+{{    $zenith_os = "unknown-linux-musl" }}
+{{- end }}
+{{- if (eq .chezmoi.arch "amd64") }}
+{{    $zenith_arch = "x86_64" }}
+{{- end }}
+{{- if and (ne $zenith_os "") (ne $zenith_arch "") }}
+{{    $zenith_package = (printf "zenith.%s-%s.tgz" $zenith_arch $zenith_os) }}
 {{- end }}
 {{ $zenith_url := (printf "https://github.com/bvaisvil/zenith/releases/download/%s/%s" $zenith_version $zenith_package) }}
 
