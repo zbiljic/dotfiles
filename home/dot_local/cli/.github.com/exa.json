@@ -11,7 +11,8 @@
     },
     "remap": {
         ".chezmoi.os": {
-            "darwin": "macos"
+            "darwin": "macos",
+            "linux": "linux"
         },
         ".chezmoi.arch": {
             "amd64": "x86_64",

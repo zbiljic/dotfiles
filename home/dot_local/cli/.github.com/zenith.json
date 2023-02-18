@@ -4,7 +4,7 @@
     "version": "0.13.1",
     "config": {
         "type": "archive",
-        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}.{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
+        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}.{{.chezmoi.arch}}-{{.chezmoi.os}}.tgz",
         "exact": true,
         "stripComponents": 1,
         "refreshPeriod": "168h"
