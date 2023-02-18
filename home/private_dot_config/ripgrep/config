@@ -2,4 +2,5 @@
 --hidden
 --line-number
 --no-heading
+--smart-case
 --sort=path
