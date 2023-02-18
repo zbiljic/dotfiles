@@ -1,0 +1,32 @@
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+# Make nano the default editor.
+export EDITOR='nano'
+
+{{ if eq .chezmoi.os "darwin" -}}
+# disable Homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1
+{{ end }}
+
+{{- $homeDir := .chezmoi.homeDir -}}
+{{- $paths := list }}
+
+{{- /* include special path directories */ -}}
+{{- range $_, $relPath := list ".local/bin" }}
+{{-   $path := joinPath $homeDir $relPath }}
+{{-   if stat $path }}
+{{-     $paths = mustAppend $paths $path }}
+{{-   end }}
+{{- end }}
+
+##
+## PATH
+##
+{{- with $paths }}
+export PATH={{ toStrings $paths | join ":" }}:$PATH
+{{- end }}
+
+skip_global_compinit=1
+
+export ZDOTDIR=$HOME

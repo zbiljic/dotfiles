@@ -1,6 +1,3 @@
-{{- if eq .chezmoi.os "darwin" }}
-{{-   include ".bashrc_darwin" }}
-{{- end }}
 {{- if eq .chezmoi.os "linux" }}
 {{-   $idLikeList := splitList " " (default .chezmoi.osRelease.id (get .chezmoi.osRelease "idLike")) }}
 {{-   if has "debian" $idLikeList }}
