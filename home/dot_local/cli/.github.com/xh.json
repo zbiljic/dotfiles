@@ -1,0 +1,22 @@
+{
+    "name": "xh",
+    "url": "https://github.com/ducaale/xh",
+    "version": "0.17.0",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
+        "exact": true,
+        "stripComponents": 1,
+        "refreshPeriod": "168h"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "apple-darwin",
+            "linux": "unknown-linux-musl"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": ""
+        }
+    }
+}

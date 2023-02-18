@@ -1,0 +1,27 @@
+{{ $s := .s }}
+{{ $dict := .dict }}
+{{ $ignoreEmpty := .ignoreEmpty }}
+{{ $replace_pattern := ( includeTemplate "_replace_pattern.tmpl") }}
+{{ $result := $s }}
+
+{{ $found := regexFindAll $replace_pattern $s -1 }}
+{{ range $_, $match := $found }}
+{{   $k := $match }}
+{{   $k = trimAll "{" $k }}
+{{   $k = trimAll "}" $k }}
+{{   $k = trim $k }}
+{{/* find value */}}
+{{   $value := fromJson (includeTemplate "_func_dig_from_dict.tmpl" (dict "dict" $dict "key" $k)) }}
+{{   if (eq false $ignoreEmpty)}}
+{{/* check if value is empty */}}
+{{     if (empty $value)}}
+{{/* return empty result */}}
+{{       $result = "" }}
+{{       break }}
+{{     end }}
+{{   end }}
+{{/* replace */}}
+{{   $result = $result | replace $match $value }}
+{{ end }}
+
+{{- $result -}}

@@ -1,0 +1,25 @@
+{{- $val := fromJson (includeTemplate "_external_remap.tmpl" .) -}}
+
+{{- $pkg_url := (includeTemplate "_func_replace_from_dict.tmpl" (dict "s" (default "" (get $val.this.config "url")) "dict" $val "ignoreEmpty" false)) -}}
+{{- $pkg_url = $pkg_url | trim -}}
+
+## {{ .this.url }}
+{{- if $pkg_url }}
+##
+{{ printf "[\"%s\"]" $val.this.name }}
+    {{- with (get $val.this.config "type") }}
+    type = {{ . | quote }}
+    {{- end }}
+    url = {{ $pkg_url | quote }}
+    {{- with (get $val.this.config "exact") }}
+    exact = {{ . }}
+    {{- end }}
+    {{- with (get $val.this.config "stripComponents") }}
+    stripComponents = {{ . }}
+    {{- end }}
+    {{- with (get $val.this.config "refreshPeriod") }}
+    refreshPeriod = {{ . | quote }}
+    {{- end }}
+{{ else }}
+{{/* not supported */}}
+{{- end }}

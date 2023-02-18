@@ -1,0 +1,20 @@
+{{ $key := .key }}
+{{ $value := .value }}
+{{ $result := dict }}
+
+{{/* split key into list */}}
+{{ $kl := splitList "." $key }}
+{{ $kl = compact $kl }}
+{{/* reverse for iteration */}}
+{{ $kl = reverse $kl }}
+
+{{ $result := dict }}
+{{ range $i, $v := $kl }}
+{{   if (eq $i 0) }}
+{{     $result = dict $v ($value | deepCopy) }}
+{{   else }}
+{{     $result = dict $v ($result | deepCopy) }}
+{{   end }}
+{{ end }}
+
+{{- toJson $result -}}

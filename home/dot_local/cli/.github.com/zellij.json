@@ -1,0 +1,21 @@
+{
+    "name": "zellij",
+    "url": "https://github.com/zellij-org/zellij",
+    "version": "0.33.0",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
+        "exact": true,
+        "refreshPeriod": "168h"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "apple-darwin",
+            "linux": "unknown-linux-musl"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": "aarch64"
+        }
+    }
+}

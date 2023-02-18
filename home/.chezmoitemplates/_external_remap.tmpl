@@ -1,0 +1,28 @@
+{{ $values := . }}
+{{ $result := $values | deepCopy }}
+
+{{ if hasKey $values "this" }}
+{{   if hasKey $values.this "remap" }}
+{{     range $k, $v := $values.this.remap }}
+{{/* extract current value */}}
+{{       $current_value := fromJson (includeTemplate "_func_dig_from_dict.tmpl" (dict "dict" $values "key" $k)) }}
+{{       if (not (empty $current_value)) }}
+{{/* get mapped value */}}
+{{         $new_value := get $v $current_value }}
+{{/* generate key */}}
+{{         $kl := splitList "." $k }}
+{{         $parent_dict_key := slice $kl 0 (sub (len $kl) 1) }}
+{{         $dict_key := slice $kl (sub (len $kl) 1) (len $kl) }}
+{{/* NOTE: should not have more than one element here */}}
+{{         $dict_key := $dict_key | join "." }}
+{{         $parent_dict := fromJson (includeTemplate "_func_dig_from_dict.tmpl" (dict "dict" $result "key" ($parent_dict_key | join "."))) }}
+{{         $_ := set $parent_dict $dict_key $new_value }}
+{{/* replace to new value */}}
+{{         $update_dict := fromJson (includeTemplate "_func_dict_nested.tmpl" (dict "key" ($parent_dict_key | join ".") "value" $parent_dict)) }}
+{{         $result = mergeOverwrite $result $update_dict }}
+{{       end }}
+{{     end }}
+{{   end }}
+{{ end }}
+
+{{- toJson $result -}}

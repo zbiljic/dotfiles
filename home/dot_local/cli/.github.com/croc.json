@@ -1,0 +1,21 @@
+{
+    "name": "croc",
+    "url": "https://github.com/schollz/croc",
+    "version": "9.6.1",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
+        "exact": true,
+        "refreshPeriod": "168h"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "macOS",
+            "linux": "Linux"
+        },
+        ".chezmoi.arch": {
+            "amd64": "64bit",
+            "arm64": "ARM64"
+        }
+    }
+}

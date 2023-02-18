@@ -1,0 +1,25 @@
+{{ $dict := .dict }}
+{{ $key := .key }}
+{{ $result := "" }}
+
+{{/* split key into list */}}
+{{ $kl := splitList "." $key }}
+{{ $kl = compact $kl }}
+
+{{ $tmp_dict := $dict | deepCopy }}
+{{ range $i, $v := $kl }}
+{{   if hasKey $tmp_dict $v }}
+{{     $val := (get $tmp_dict $v) }}
+{{     if kindIs "map" $val }}
+{{       $tmp_dict = $val }}
+{{       if (eq $i (sub (len $kl) 1)) }}
+{{/* last element */}}
+{{         $result = $tmp_dict }}
+{{       end }}
+{{     else }}
+{{       $result = (get $tmp_dict $v) }}
+{{     end }}
+{{   end }}
+{{ end }}
+
+{{- toJson $result -}}
