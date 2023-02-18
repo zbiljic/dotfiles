@@ -33,8 +33,11 @@
     prune-branches = "!git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
     ######################
 
+{{-  if .personal }}
+
 [github]
     user = zbiljic
 
-[url "git@github.com:"]
-    insteadOf = https://github.com/
+[url "git@github.com:zbiljic/"]
+    insteadOf = https://github.com/zbiljic/
+{{- end }}

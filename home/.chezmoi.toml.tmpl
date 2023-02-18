@@ -14,7 +14,9 @@
 {{- $hostname := .chezmoi.hostname -}}
 
 {{- if not $ephemeral -}}
-{{-   if (hasPrefix "NAS" $hostname) -}}
+{{-   if (hasPrefix "nemanja" (lower $hostname)) -}}
+{{-     $personal = true -}}
+{{-   else if (hasPrefix "NAS" $hostname) -}}
 {{-     $headless = true -}}
 {{-     $personal = true -}}
 {{-   else if stdinIsATTY -}}
