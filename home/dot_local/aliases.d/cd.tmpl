@@ -1,0 +1,9 @@
+# easier navigation with dots
+{{- range $i, $e := untilStep 2 9 1 }}
+# {{ (sub $e 1) | toString }}
+alias {{ repeat $e "." }}="cd ..
+{{-   range $i2, $e2 := until ((sub $e 2) | int) -}}
+/..
+{{-   end -}}
+"
+{{- end }}

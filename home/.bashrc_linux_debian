@@ -68,8 +68,3 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# Alias definitions.
-
-# shellcheck source=dot_bashrc.d/bashrc.init
-. "$HOME"/.bashrc.d/bashrc.init

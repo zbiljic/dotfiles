@@ -14,8 +14,3 @@ shopt -s checkwinsize
 
 # show path before the $ prompt
 export PS1='\u@\h:\w$ '
-
-# Alias definitions.
-
-# shellcheck source=dot_bashrc.d/bashrc.init
-. "$HOME"/.bashrc.d/bashrc.init

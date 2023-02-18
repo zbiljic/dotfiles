@@ -7,4 +7,9 @@
 {{-   else }}
 {{-     include ".bashrc_linux" }}
 {{-   end }}
+
+if [ -f ~/.sh_aliases ]; then
+   . ~/.sh_aliases
+fi
+
 {{- end }}

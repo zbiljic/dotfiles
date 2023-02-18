@@ -1,9 +1,4 @@
-{{- if .kubernetes -}}
-#!/usr/bin/env bash
-
-##
-## Kubernetes
-##
+{{- if lookPath "kubectl" -}}
 
 # Used to run kubectl shortly
 alias k="kubectl"
@@ -67,4 +62,4 @@ kpl() {
   kubectl logs "$1" -c "$2" --namespace="$ns" -f
 }
 
-{{- end -}}
+{{- end }}

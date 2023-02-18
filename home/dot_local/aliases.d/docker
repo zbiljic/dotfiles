@@ -1,9 +1,3 @@
-#!/usr/bin/env bash
-
-##
-## Docker
-##
-
 # List all Docker images
 alias dimg='docker images -a'
 # List all Docker containers (running and exited)

@@ -1,3 +1,7 @@
 # ZSH options
 setopt histignoredups
 setopt histignorespace
+
+if [ -f ~/.sh_aliases ]; then
+   . ~/.sh_aliases
+fi

@@ -1,0 +1,9 @@
+# Alias definitions:
+{{ $homeDir := .chezmoi.homeDir -}}
+{{- $paths := glob (joinPath $homeDir ".local/aliases.d/*") }}
+{{- range $_, $path := $paths }}
+##
+## {{ base $path | toString }}
+##
+{{    include $path }}
+{{- end }}
