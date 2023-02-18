@@ -8,6 +8,8 @@
 {{-     include ".bashrc_linux" }}
 {{-   end }}
 
+{{- includeTemplate ".sh_env.tmpl" . }}
+
 if [ -f ~/.sh_aliases ]; then
    . ~/.sh_aliases
 fi
