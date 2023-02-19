@@ -5,3 +5,7 @@ setopt histignorespace
 if [ -f ~/.sh_aliases ]; then
    . ~/.sh_aliases
 fi
+
+{{ if lookPath "starship" -}}
+eval "$(starship init zsh)"
+{{- end }}

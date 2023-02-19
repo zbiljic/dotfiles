@@ -14,4 +14,8 @@ if [ -f ~/.sh_aliases ]; then
    . ~/.sh_aliases
 fi
 
+{{ if lookPath "starship" -}}
+eval "$(starship init bash)"
+{{- end }}
+
 {{- end }}
