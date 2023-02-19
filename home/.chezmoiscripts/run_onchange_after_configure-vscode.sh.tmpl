@@ -1,0 +1,27 @@
+{{ if and (eq .chezmoi.os "darwin" "linux") (not .headless) -}}
+
+{{ $extensions := list
+     "andyyaldoo.vscode-json"
+     "bungcip.better-toml"
+     "dracula-theme.theme-dracula"
+     "EditorConfig.EditorConfig"
+     "jinliming2.vscode-go-template"
+     "mechatroner.rainbow-csv"
+     "ms-vscode-remote.remote-containers"
+     "ms-vscode-remote.remote-ssh-edit"
+     "ms-vscode-remote.remote-ssh"
+     "ms-vscode-remote.vscode-remote-extensionpack"
+     "streetsidesoftware.code-spell-checker"
+     "wayou.vscode-todo-highlight"
+     "zxh404.vscode-proto3"
+-}}
+
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+{{ range $extensions -}}
+code --force --install-extension {{ . }}
+{{ end -}}
+
+{{ end -}}
