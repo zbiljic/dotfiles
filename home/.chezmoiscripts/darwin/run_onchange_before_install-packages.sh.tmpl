@@ -10,6 +10,7 @@ if ! command -v brew > /dev/null 2>&1; then
 fi
 
 {{ $taps := list
+    "homebrew/cask-fonts"
     "homebrew/cask-versions"
 -}}
 
@@ -26,6 +27,7 @@ fi
 
 {{ $casks := list
     "aware"
+    "font-jetbrains-mono-nerd-font"
     "fork"
     "rectangle"
     "stats"
