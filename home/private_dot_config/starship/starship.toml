@@ -1,0 +1,74 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+╭─\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$package\
+$memory_usage\
+$sudo\
+$fill\
+$time\
+$cmd_duration
+╰─\
+$jobs\
+$battery\
+$container\
+$shell\
+$character
+"""
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Replace the "❯" symbol in the prompt with "$"
+[character]
+success_symbol = "\\$"
+error_symbol = "[x](bold red)"
+
+[cmd_duration]
+min_time = 500
+show_milliseconds = true
+
+[directory]
+truncation_length = 10
+truncate_to_repo = false
+format = ': [$path]($style) [$read_only]($read_only_style)'
+
+[fill]
+symbol = ' '
+
+[hostname]
+format = ' [$ssh_symbol$hostname]($style) in '
+
+[localip]
+format = '[$localipv4]($style)'
+disabled = false
+
+[memory_usage]
+threshold = 90
+disabled = false
+
+[shlvl]
+format = ' [$symbol$shlvl]($style)'
+symbol = '↕️ '
+disabled = false
+
+[sudo]
+disabled = false
+
+[time]
+disabled = false
+
+[username]
+format = '[$user]($style)'
+style_user = 'bold green'
+show_always = true
