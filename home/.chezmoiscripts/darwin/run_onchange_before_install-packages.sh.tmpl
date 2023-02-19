@@ -9,34 +9,43 @@ if ! command -v brew > /dev/null 2>&1; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+{{ $taps := list
+    "homebrew/cask-versions"
+-}}
+
 {{ $brews := list
     "bash"
-    "curl"
-    "ffmpeg"
     "git"
     "go"
+    "hstr"
     "jq"
+    "mediainfo"
+    "mpv"
     "wget"
-    "yt-dlp"
 -}}
 
 {{ $casks := list
-    "iterm2"
-    "mpv"
+    "aware"
+    "fork"
     "rectangle"
+    "stats"
     "visual-studio-code"
-    "zoom"
 -}}
 
 {{ if .personal -}}
 {{   $casks = concat $casks (list
+       "firefox-developer-edition"
+       "google-chrome-dev"
        "keepassxc"
-       "telegram"
-       "viber"
+       "obsidian"
+       "tailscale"
      ) -}}
 {{ end -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($taps | sortAlpha | uniq) -}}
+tap "{{ . }}"
+{{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
