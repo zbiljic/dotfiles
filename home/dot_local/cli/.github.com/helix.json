@@ -1,7 +1,7 @@
 {
     "name": "helix",
     "url": "https://github.com/helix-editor/helix",
-    "version": "22.08.1",
+    "version": "22.12",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}-{{.this.version}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.xz",
