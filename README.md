@@ -7,11 +7,11 @@ Managed using [chezmoi](https://github.com/twpayne/chezmoi).
 ### One-line install
 
 ```bash
-sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply zbiljic
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply zbiljic
 ```
 
 or
 
 ```bash
-sh -c "$(wget -qO- git.io/chezmoi)" -- init --apply zbiljic
+sh -c "$(wget -qO- get.chezmoi.io)" -- init --apply zbiljic
 ```
