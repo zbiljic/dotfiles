@@ -1,0 +1,16 @@
+{{ $json := .json }}
+{{ $rootPath := .rootPath }}
+
+{{ $result := $json | deepCopy }}
+
+{{ if hasKey $json "$extends" }}
+{{   $extendsFileName := get $json "$extends" }}
+{{   $extendsFullPath := (joinPath $rootPath $extendsFileName) }}
+{{   if stat $extendsFullPath }}
+{{     $extendsContent := include $extendsFullPath }}
+{{     $extends := fromJson $extendsContent }}
+{{     $result = mergeOverwrite $extends $json }}
+{{   end }} {{/* if stat $extendsFullPath */}}
+{{ end }} {{/* if hasKey $values "this" */}}
+
+{{- toJson $result -}}
