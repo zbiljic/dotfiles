@@ -1,0 +1,6 @@
+{{ $path := joinPath .chezmoi.homeDir ".local/cli/zenith/zenith" }}
+{{- if stat $path -}}
+#!/usr/bin/env bash
+
+{{ $path }} --disable-history "$@"
+{{- end }}

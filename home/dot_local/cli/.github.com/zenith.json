@@ -6,7 +6,6 @@
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}.{{.chezmoi.arch}}-{{.chezmoi.os}}.tgz",
         "exact": true,
-        "stripComponents": 1,
         "refreshPeriod": "168h"
     },
     "remap": {
@@ -16,7 +15,7 @@
         },
         ".chezmoi.arch": {
             "amd64": "x86_64",
-            "arm64": ""
+            "arm64": "aarch64"
         }
     }
 }
