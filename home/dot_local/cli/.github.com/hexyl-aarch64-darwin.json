@@ -1,0 +1,13 @@
+{
+    "$extends": "hexyl.json",
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "apple-darwin",
+            "linux": ""
+        },
+        ".chezmoi.arch": {
+            "amd64": "",
+            "arm64": "x86_64"
+        }
+    }
+}
