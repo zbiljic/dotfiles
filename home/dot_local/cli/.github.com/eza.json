@@ -1,0 +1,21 @@
+{
+    "name": "eza",
+    "url": "https://github.com/eza-community/eza",
+    "version": "0.15.0",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.arch}}-{{.chezmoi.os}}.zip",
+        "exact": true,
+        "refreshPeriod": "168h"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "",
+            "linux": "unknown-linux-musl"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": ""
+        }
+    }
+}

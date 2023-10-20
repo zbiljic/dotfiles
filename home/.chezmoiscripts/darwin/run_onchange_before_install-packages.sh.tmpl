@@ -16,6 +16,7 @@ fi
 
 {{ $brews := list
     "bash"
+    "eza"
     "git"
     "go"
     "hstr"
@@ -36,7 +37,6 @@ fi
 
 {{ if (eq .chezmoi.arch "arm64") -}}
 {{   $brews = concat $brews (list
-       "exa"
        "fd"
        "ripgrep"
      ) -}}

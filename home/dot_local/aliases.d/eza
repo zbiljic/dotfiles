@@ -1,0 +1,5 @@
+alias e='eza -lag'
+alias ee='eza -abghHliS'
+alias et='eza -bghHliS -T -L 2'
+alias etr='eza -T'
+alias etra='eza -a -T'
