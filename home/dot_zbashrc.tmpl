@@ -14,6 +14,15 @@ if [ -f ~/.sh_aliases ]; then
    . ~/.sh_aliases
 fi
 
+{{- $path := joinPath .chezmoi.homeDir ".local/scripts" "bash-preexec.sh" }}
+{{ if stat $path }}
+source {{ $path }}
+{{- end }}
+
+{{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "atuin") -}}
+eval "$(atuin init bash --disable-up-arrow)"
+{{- end }}
+
 {{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "starship") -}}
 eval "$(starship init bash)"
 {{- end }}

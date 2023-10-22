@@ -1,0 +1,6 @@
+## https://github.com/rcaloras/bash-preexec
+##
+["bash-preexec.sh"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh"
+    refreshPeriod = "168h"

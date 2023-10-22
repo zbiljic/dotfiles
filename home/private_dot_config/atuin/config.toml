@@ -1,0 +1,6 @@
+# https://atuin.sh/docs/config
+dialect = "uk"
+workspaces = true
+invert = true
+inline_height = 30
+enter_accept = true
