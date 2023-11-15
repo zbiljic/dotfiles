@@ -1,8 +1,12 @@
 *~
-.DS_Store
-.vscode/
-
 *__*
-.env
+
+.DS_Store
+.vscode/*
+
 .bin/
-modd.conf
+.mirrord/
+
+.air.toml
+.env.*
+*.local
