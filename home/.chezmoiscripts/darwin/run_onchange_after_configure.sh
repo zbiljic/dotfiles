@@ -385,7 +385,7 @@ for app in "Activity Monitor" \
 	"SystemUIServer" \
 	"Terminal" \
 	"iCal"; do
-	killall "${app}" &> /dev/null
+	killall "${app}" &> /dev/null || true
 done
 
 killall Dock
