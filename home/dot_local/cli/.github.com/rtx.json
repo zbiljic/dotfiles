@@ -1,0 +1,22 @@
+{
+    "name": "rtx",
+    "url": "https://github.com/jdx/rtx",
+    "version": "2023.12.7",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
+        "exact": true,
+        "stripComponents": 1,
+        "refreshPeriod": "168h"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "macos",
+            "linux": "linux"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x64",
+            "arm64": "arm64"
+        }
+    }
+}

@@ -10,6 +10,10 @@ fi
 eval "$(atuin init zsh --disable-up-arrow)"
 {{- end }}
 
+{{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "rtx") -}}
+eval "$(rtx activate zsh)"
+{{- end }}
+
 {{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "starship") -}}
 eval "$(starship init zsh)"
 {{- end }}
