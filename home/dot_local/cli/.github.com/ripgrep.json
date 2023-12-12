@@ -1,7 +1,7 @@
 {
     "name": "ripgrep",
     "url": "https://github.com/BurntSushi/ripgrep",
-    "version": "13.0.0",
+    "version": "14.0.3",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}-{{.this.version}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
