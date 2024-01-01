@@ -1,7 +1,7 @@
 {
     "name": "rtx",
     "url": "https://github.com/jdx/rtx",
-    "version": "2023.12.23",
+    "version": "2024.0.0",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
