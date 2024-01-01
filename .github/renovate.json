@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     ":combinePatchMinorReleases",
-    ":separateMultipleMajorReleases"
+    ":separateMultipleMajorReleases",
+    ":semanticCommitsDisabled"
   ],
   "schedule": [
     "before 4am on Saturday"
@@ -35,6 +36,13 @@
       "extractVersionTemplate": "^v?(?<version>.*)$",
       "versioningTemplate": "semver-coerced",
       "datasourceTemplate": "github-releases"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["regex"],
+      "commitMessageAction": "update",
+      "commitMessageTopic": "{{depName}}"
     }
   ]
 }
