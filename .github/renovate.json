@@ -22,6 +22,19 @@
       "versioningTemplate": "semver",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "twpayne/chezmoi"
+    },
+    {
+      "customType": "regex",
+      "description": "Update GitHub packages",
+      "fileMatch": [
+        ".*/\\.github\\.com/.*\\.json"
+      ],
+      "matchStrings": [
+        "\"url\":\\s?\"https:\/\/github\\.com\/(?<depName>.+)\",\\s*\"version\":\\s?\"(?<currentValue>.+)\","
+      ],
+      "extractVersionTemplate": "^v?(?<version>.*)$",
+      "versioningTemplate": "semver-coerced",
+      "datasourceTemplate": "github-releases"
     }
   ]
 }
