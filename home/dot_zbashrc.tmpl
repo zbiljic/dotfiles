@@ -23,8 +23,8 @@ source {{ $path }}
 eval "$(atuin init bash --disable-up-arrow)"
 {{- end }}
 
-{{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "rtx") -}}
-eval "$(rtx activate bash)"
+{{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "mise") -}}
+eval "$(mise activate bash)"
 {{- end }}
 
 {{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "starship") -}}

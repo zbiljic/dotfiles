@@ -1,6 +1,6 @@
 {
-    "name": "rtx",
-    "url": "https://github.com/jdx/rtx",
+    "name": "mise",
+    "url": "https://github.com/jdx/mise",
     "version": "2024.1.7",
     "config": {
         "type": "archive",
