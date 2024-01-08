@@ -13,6 +13,9 @@ $git_commit\
 $git_state\
 $git_status\
 $package\
+$golang\
+$python\
+$terraform\
 $memory_usage\
 $sudo\
 $fill\
@@ -64,6 +67,10 @@ disabled = false
 
 [sudo]
 disabled = false
+
+[terraform]
+format = 'via [$symbol]($style) '
+detect_files = ["terragrunt.hcl"]
 
 [time]
 disabled = false
