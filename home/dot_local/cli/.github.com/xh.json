@@ -1,7 +1,7 @@
 {
     "name": "xh",
     "url": "https://github.com/ducaale/xh",
-    "version": "0.20.1",
+    "version": "0.21.0",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
