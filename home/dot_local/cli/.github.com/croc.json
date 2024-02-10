@@ -4,7 +4,7 @@
     "version": "9.6.9",
     "config": {
         "type": "archive",
-        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_v{{.this.version}}_{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
         "exact": true,
         "refreshPeriod": "168h"
     },
