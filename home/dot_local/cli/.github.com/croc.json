@@ -1,7 +1,7 @@
 {
     "name": "croc",
     "url": "https://github.com/schollz/croc",
-    "version": "9.6.13",
+    "version": "9.6.14",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_v{{.this.version}}_{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
