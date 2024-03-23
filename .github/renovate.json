@@ -40,6 +40,13 @@
   ],
   "packageRules": [
     {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeStrategy": "rebase",
+      "automergeType": "branch"
+    },
+    {
       "matchManagers": ["regex"],
       "commitMessageAction": "update",
       "commitMessageTopic": "{{depName}}"
