@@ -1,0 +1,9 @@
+name: "Install Steps"
+description: 'Install dotfiles locally'
+runs:
+  using: "composite"
+  steps:
+    - name: Install
+      shell: bash
+      run: |
+        bash install.sh --no-tty --progress false
