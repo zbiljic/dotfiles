@@ -9,4 +9,5 @@
 
 .air.toml
 .env.*
+.mise.toml
 *.local
