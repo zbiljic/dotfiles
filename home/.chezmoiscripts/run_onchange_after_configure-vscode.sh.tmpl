@@ -20,7 +20,7 @@
 set -eufo pipefail
 
 {{ range $extensions -}}
-code --force --install-extension {{ . }}
+/opt/homebrew/bin/code --force --install-extension {{ . }}
 {{ end -}}
 
 {{ end -}}
