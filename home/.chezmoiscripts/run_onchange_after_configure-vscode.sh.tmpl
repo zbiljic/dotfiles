@@ -19,8 +19,17 @@
 
 set -eufo pipefail
 
-{{ range $extensions -}}
-/opt/homebrew/bin/code --force --install-extension {{ . }}
+{{ $codePath := "" }}
+{{- if lookPath "code" -}}
+{{   $codePath = (lookPath "code") }}
+{{ else if stat "/opt/homebrew/bin/code" }}
+{{   $codePath = "/opt/homebrew/bin/code" }}
+{{- end -}}
+
+{{ if $codePath -}}
+{{   range $extensions -}}
+{{ $codePath }} --force --install-extension {{ . }}
+{{   end -}}
 {{ end -}}
 
 {{ end -}}
