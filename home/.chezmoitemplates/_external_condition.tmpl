@@ -6,7 +6,7 @@
 {{     range $k, $v := $values.this.condition }}
 {{/* extract current value */}}
 {{       $current_value := fromJson (includeTemplate "_func_dig_from_dict.tmpl" (dict "dict" $values "key" $k)) }}
-{{       if (not (empty $current_value)) }}
+{{       if not (kindIs "invalid" $current_value) }}
 {{/* generate key */}}
 {{         $kl := splitList "." $k }}
 {{         $parent_dict_key := slice $kl 0 (sub (len $kl) 1) }}
@@ -23,6 +23,13 @@
 {{           $_ := set $result "this" $this }}
 {{           break }}
 {{         end }}
+{{       else }}
+{{/* condition not found, treat as false */}}
+{{         $this := get $result "this" }}
+{{         $_ := unset $this "config" }}
+{{         $_ := set $this "config" dict }}
+{{         $_ := set $result "this" $this }}
+{{         break }}
 {{       end }}
 {{     end }}
 {{   end }}
