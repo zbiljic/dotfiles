@@ -1,0 +1,21 @@
+{
+    "name": "rqbit",
+    "url": "https://github.com/ikatson/rqbit",
+    "version": "5.6.0",
+    "config": {
+        "type": "file",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}-{{.chezmoi.arch}}",
+        "executable": true,
+        "refreshPeriod": "168h"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "",
+            "linux": "linux-static"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": "aarch64"
+        }
+    }
+}
