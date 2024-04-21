@@ -13,5 +13,8 @@
             "darwin": "Darwin",
             "linux": "Linux"
         }
+    },
+    "condition": {
+        ".chezmoi.config.data.kubernetes": true
     }
 }
