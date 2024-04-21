@@ -1,9 +1,11 @@
-{{- $val := fromJson (includeTemplate "_external_remap.tmpl" .) -}}
+{{- $val := .val -}}
+{{- $val = fromJson (includeTemplate "_external_remap.tmpl" $val) -}}
+{{- $val = fromJson (includeTemplate "_external_condition.tmpl" $val) -}}
 
 {{- $pkg_url := (includeTemplate "_func_replace_from_dict.tmpl" (dict "s" (default "" (get $val.this.config "url")) "dict" $val "ignoreEmpty" false)) -}}
 {{- $pkg_url = $pkg_url | trim -}}
 
-## {{ .this.url }}
+## {{ .val.this.url }} {{ printf "[%s]" .path }}
 {{- if $pkg_url }}
 ##
 {{ printf "[\"%s\"]" $val.this.name }}

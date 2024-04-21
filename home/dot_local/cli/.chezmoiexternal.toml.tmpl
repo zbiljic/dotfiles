@@ -12,5 +12,5 @@
 {{-   $values_copy := $values | deepCopy }}
 {{-   $_ := set $values_copy "this" $external }}
 {{- /* include entry */ -}}
-{{    includeTemplate "external_github.toml.tmpl" $values_copy }}
+{{    includeTemplate "external_github.toml.tmpl" (dict "val" $values_copy "path" (osBase $path)) }}
 {{- end -}} {{/* range $_, $path := $externalGithub */}}
