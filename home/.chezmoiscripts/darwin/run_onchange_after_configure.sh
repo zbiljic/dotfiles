@@ -96,11 +96,11 @@ sudo systemsetup -settimezone "Europe/Belgrade" > /dev/null
 # Energy saving                                                               #
 ###############################################################################
 
-# Sleep the display after 15 minutes
-sudo pmset -a displaysleep 15
+# Sleep the display after 10 minutes
+sudo pmset -a displaysleep 10
 
-# Set machine sleep to 10 minutes on battery
-sudo pmset -b sleep 10
+# Set machine sleep to 5 minutes on battery
+sudo pmset -b sleep 5
 
 ###############################################################################
 # Screen                                                                      #
