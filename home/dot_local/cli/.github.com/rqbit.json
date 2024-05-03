@@ -1,7 +1,7 @@
 {
     "name": "rqbit",
     "url": "https://github.com/ikatson/rqbit",
-    "version": "5.6.1",
+    "version": "5.6.4",
     "config": {
         "type": "file",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}-{{.chezmoi.arch}}",
