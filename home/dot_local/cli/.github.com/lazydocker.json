@@ -1,0 +1,23 @@
+{
+    "name": "lazydocker",
+    "url": "https://github.com/jesseduffield/lazydocker",
+    "version": "0.23.3",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
+        "exact": true
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "Darwin",
+            "linux": "Linux"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": "arm64"
+        }
+    },
+    "condition": {
+        ".chezmoi.config.data.ephemeral": false
+    }
+}
