@@ -6,8 +6,7 @@
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
         "exact": true,
-        "stripComponents": 1,
-        "refreshPeriod": "168h"
+        "stripComponents": 1
     },
     "remap": {
         ".chezmoi.os": {

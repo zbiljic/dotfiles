@@ -5,8 +5,7 @@
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}.{{.chezmoi.arch}}-{{.chezmoi.os}}.tgz",
-        "exact": true,
-        "refreshPeriod": "168h"
+        "exact": true
     },
     "remap": {
         ".chezmoi.os": {

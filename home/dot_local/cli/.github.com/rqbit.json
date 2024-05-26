@@ -5,8 +5,7 @@
     "config": {
         "type": "file",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}-{{.chezmoi.arch}}",
-        "executable": true,
-        "refreshPeriod": "168h"
+        "executable": true
     },
     "remap": {
         ".chezmoi.os": {
