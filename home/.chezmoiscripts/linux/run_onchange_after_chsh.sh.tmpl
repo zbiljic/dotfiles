@@ -3,5 +3,7 @@
 
 set -eufo pipefail
 
-chsh -s /usr/bin/bash
+{{- if lookPath "bash" }}
+chsh -s {{ lookPath "bash" }}
+{{- end }}
 {{ end -}}
