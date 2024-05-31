@@ -10,4 +10,5 @@
 .air.toml
 .env.*
 .mise.toml
+.supermavenignore
 *.local
