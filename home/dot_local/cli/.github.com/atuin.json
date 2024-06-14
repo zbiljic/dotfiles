@@ -11,7 +11,7 @@
     "remap": {
         ".chezmoi.os": {
             "darwin": "apple-darwin",
-            "linux": "unknown-linux-gnu"
+            "linux": "unknown-linux-musl"
         },
         ".chezmoi.arch": {
             "amd64": "x86_64",
