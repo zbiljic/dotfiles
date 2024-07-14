@@ -1,0 +1,4 @@
+{{- if lookPath "terragrunt" -}}
+export TERRAGRUNT_PROVIDER_CACHE=1
+export TERRAGRUNT_PROVIDER_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+{{- end }}
