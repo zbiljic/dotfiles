@@ -40,6 +40,7 @@ error_symbol = "[x](bold red)"
 [cmd_duration]
 min_time = 500
 show_milliseconds = true
+show_notifications = true
 
 [directory]
 truncation_length = 10
