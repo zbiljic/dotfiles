@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ -z "${MACOS_DEFAULTS}" ]; then
+    echo "MACOS_DEFAULTS is not set, skipping..."
+    exit 0
+fi
+
 set -eufo pipefail
 
 # ~/.macos — https://mths.be/macos
