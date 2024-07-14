@@ -6,3 +6,17 @@ Host *
   AddKeysToAgent yes
   UseKeychain yes
 {{- end }}
+
+{{ if .personal -}}
+Host raspberrypi
+  HostName raspberrypi
+  User nemanjaz
+
+Host minim1
+  HostName nemanjas-mac-mini-m1
+  User nemanjaz
+
+Host maxm1
+  HostName nemanjas-mac-studio-m1
+  User nemanjaz
+{{ end -}}
