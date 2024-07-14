@@ -1,0 +1,13 @@
+{
+    "name": "yq",
+    "url": "https://github.com/mikefarah/yq",
+    "version": "4.44.2",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
+        "stripComponents": 1
+    },
+    "condition": {
+        ".chezmoi.config.data.ephemeral": false
+    }
+}
