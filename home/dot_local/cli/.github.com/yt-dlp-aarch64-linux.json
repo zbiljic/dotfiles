@@ -1,0 +1,16 @@
+{
+    "$extends": "yt-dlp.json",
+    "config": {
+        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}_{{.chezmoi.arch}}"
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "",
+            "linux": "linux"
+        },
+        ".chezmoi.arch": {
+            "amd64": "",
+            "arm64": "aarch64"
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "name": "yt-dlp",
+    "url": "https://github.com/yt-dlp/yt-dlp",
+    "version": "2024.07.16",
+    "config": {
+        "type": "file",
+        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}",
+        "executable": true
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "macos",
+            "linux": "linux"
+        }
+    },
+    "condition": {
+        ".chezmoi.config.data.ephemeral": false,
+        ".chezmoi.config.data.personal": true
+    }
+}

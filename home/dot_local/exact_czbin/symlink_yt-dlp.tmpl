@@ -1,0 +1,4 @@
+{{ $path := joinPath .chezmoi.homeDir ".local/cli/yt-dlp" }}
+{{ if stat $path }}
+{{   $path }}
+{{ end }}
