@@ -1,7 +1,7 @@
 {
     "name": "bottom",
     "url": "https://github.com/ClementTsang/bottom",
-    "version": "0.9.6",
+    "version": "0.9.7",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
