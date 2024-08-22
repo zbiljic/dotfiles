@@ -1,7 +1,7 @@
 {
     "name": "mise",
     "url": "https://github.com/jdx/mise",
-    "version": "2024.8.9",
+    "version": "2024.8.11",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
