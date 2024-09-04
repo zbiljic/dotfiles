@@ -98,16 +98,6 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 sudo systemsetup -settimezone "Europe/Belgrade" > /dev/null
 
 ###############################################################################
-# Energy saving                                                               #
-###############################################################################
-
-# Sleep the display after 10 minutes
-sudo pmset -a displaysleep 10
-
-# Set machine sleep to 5 minutes on battery
-sudo pmset -b sleep 5
-
-###############################################################################
 # Screen                                                                      #
 ###############################################################################
 
