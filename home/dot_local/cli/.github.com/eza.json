@@ -1,7 +1,7 @@
 {
     "name": "eza",
     "url": "https://github.com/eza-community/eza",
-    "version": "0.19.1",
+    "version": "0.19.2",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.arch}}-{{.chezmoi.os}}.zip",
