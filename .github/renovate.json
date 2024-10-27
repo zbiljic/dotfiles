@@ -49,6 +49,11 @@
       "matchManagers": ["regex"],
       "commitMessageAction": "update",
       "commitMessageTopic": "{{depName}}"
+    },
+    {
+      "description": "Slowdown some updates",
+      "matchPackageNames": ["/mise/"],
+      "schedule": ["before 4am on Monday"]
     }
   ]
 }
