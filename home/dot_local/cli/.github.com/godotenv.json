@@ -7,6 +7,12 @@
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
         "exact": true
     },
+    "remap": {
+        ".chezmoi.arch": {
+            "amd64": "amd64",
+            "arm64": ""
+        }
+    },
     "condition": {
         ".chezmoi.config.data.ephemeral": false
     }
