@@ -30,7 +30,7 @@
         ".*/\\.github\\.com/.*\\.json"
       ],
       "matchStrings": [
-        "\"url\":\\s?\"https:\/\/github\\.com\/(?<depName>.+)\",\\s*\"version\":\\s?\"(?<currentValue>.+)\","
+        "\"url\":\\s?\"https://github\\.com/(?<depName>.+)\",\\s*\"version\":\\s?\"(?<currentValue>.+)\","
       ],
       "extractVersionTemplate": "^v?(?<version>.*)$",
       "versioningTemplate": "semver-coerced",
@@ -46,7 +46,7 @@
       "automergeType": "branch"
     },
     {
-      "matchManagers": ["regex"],
+      "matchManagers": ["custom.regex"],
       "commitMessageAction": "update",
       "commitMessageTopic": "{{depName}}"
     },
