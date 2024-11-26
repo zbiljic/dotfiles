@@ -1,7 +1,7 @@
 {
     "name": "lazydocker",
     "url": "https://github.com/jesseduffield/lazydocker",
-    "version": "0.23.3",
+    "version": "0.24.1",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
