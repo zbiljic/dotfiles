@@ -15,16 +15,16 @@ return {
   scrollback_lines = 65536,
 
   -- Controls the maximum frame rate used when rendering easing effects
-	-- https://wezfurlong.org/wezterm/config/lua/config/animation_fps.html
-	animation_fps = 30,
+  -- https://wezfurlong.org/wezterm/config/lua/config/animation_fps.html
+  animation_fps = 30,
 
-	-- Limits the maximum number of frames per second that wezterm will attempt to draw.
+  -- Limits the maximum number of frames per second that wezterm will attempt to draw.
   -- Defaults to 60.
-	-- https://wezfurlong.org/wezterm/config/lua/config/max_fps.html
+  -- https://wezfurlong.org/wezterm/config/lua/config/max_fps.html
   max_fps = 120,
 
   -- Whether to display a confirmation prompt when the window is closed by
   -- the windowing environment, either because the user closed it with
   -- the window decorations, or instructed their window manager to close it.
-	window_close_confirmation = "NeverPrompt",
+  window_close_confirmation = "NeverPrompt",
 }
