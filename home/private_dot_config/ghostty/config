@@ -1,0 +1,7 @@
+theme = dracula
+
+copy-on-select = true
+
+# Quick Terminal
+keybind = global:alt+space=toggle_quick_terminal
+quick-terminal-animation-duration = 0.1
