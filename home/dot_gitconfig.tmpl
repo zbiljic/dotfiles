@@ -4,10 +4,13 @@
     editor = nano
     excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
     autocrlf = input
-[pull]
-    ff = only
 [init]
     defaultBranch = main
+[pull]
+    ff = only
+[push]
+    autoSetupRemote = true
+    default = current
 
 [alias]
     co = checkout
