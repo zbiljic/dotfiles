@@ -17,3 +17,8 @@ skip_global_compinit=1
 export WORDCHARS='*_-.[]~=/&;!#$%^(){}<>'
 
 export ZDOTDIR=$HOME
+
+{{ $path := joinPath .chezmoi.homeDir ".zshenv_extra" }}
+{{- if stat $path }}
+{{ include $path }}
+{{- end }}

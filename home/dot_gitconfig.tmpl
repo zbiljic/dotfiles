@@ -57,3 +57,8 @@
 [url "git@github.com:zbiljic/"]
     insteadOf = https://github.com/zbiljic/
 {{- end }}
+
+{{ $path := joinPath .chezmoi.homeDir ".gitconfig_extra" }}
+{{- if stat $path }}
+{{ include $path }}
+{{- end }}
