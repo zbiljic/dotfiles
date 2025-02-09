@@ -1,0 +1,20 @@
+*~
+*__*
+
+.DS_Store
+.vscode/*
+
+.bin/
+.mirrord/
+
+.air.toml
+.env.*
+.mise.toml
+.supermavenignore
+*.local
+
+{{ $path := joinPath .chezmoi.homeDir ".gitignore_global_extra" }}
+{{- if stat $path -}}
+# Extra
+{{ include $path }}
+{{- end -}}
