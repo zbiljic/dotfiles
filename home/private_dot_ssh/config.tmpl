@@ -20,3 +20,9 @@ Host maxm1
   HostName nemanjas-mac-studio-m1
   User nemanjaz
 {{ end -}}
+
+{{ $path := printf "%s_extra" .chezmoi.targetFile }}
+{{- if stat $path }}
+# Extra
+{{ include $path }}
+{{- end }}
