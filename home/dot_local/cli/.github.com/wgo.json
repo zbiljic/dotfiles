@@ -1,0 +1,23 @@
+{
+    "name": "wgo",
+    "url": "https://github.com/bokwoon95/wgo",
+    "version": "0.5.10",
+    "config": {
+        "type": "file",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}",
+        "executable": true
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "",
+            "linux": "linux"
+        },
+        ".chezmoi.arch": {
+            "amd64": "",
+            "arm64": ""
+        }
+    },
+    "condition": {
+        ".chezmoi.config.data.ephemeral": false
+    }
+}
