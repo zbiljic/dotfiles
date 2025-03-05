@@ -2,15 +2,33 @@
     useConfigOnly = true
 [core]
     editor = nano
-    excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+    excludesfile = ~/.gitignore_global
     autocrlf = input
 [init]
     defaultBranch = main
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[fetch]
+    prune = true
+    pruneTags = true
 [pull]
     ff = only
 [push]
     autoSetupRemote = true
     default = current
+[rebase]
+    autoStash = true
+    updateRefs = true
+
+[help]
+    autocorrect = prompt
 
 [alias]
     co = checkout
