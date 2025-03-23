@@ -1,0 +1,19 @@
+{
+    "name": "ggh",
+    "url": "https://github.com/byawitz/ggh",
+    "version": "0.1.4",
+    "config": {
+        "type": "file",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}_{{.chezmoi.arch}}",
+        "executable": true
+    },
+    "remap": {
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": "arm64"
+        }
+    },
+    "condition": {
+        ".chezmoi.config.data.ephemeral": false
+    }
+}
