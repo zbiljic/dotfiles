@@ -1,7 +1,7 @@
 {
     "name": "starship",
     "url": "https://github.com/starship/starship",
-    "version": "1.22.1",
+    "version": "1.23.0",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
