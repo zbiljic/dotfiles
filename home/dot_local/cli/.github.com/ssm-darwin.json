@@ -1,0 +1,13 @@
+{
+    "$extends": "ssm.json",
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "darwin",
+            "linux": ""
+        },
+        ".chezmoi.arch": {
+            "amd64": "all",
+            "arm64": "all"
+        }
+    }
+}
