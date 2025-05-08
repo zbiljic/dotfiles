@@ -48,5 +48,5 @@
 ## PATH
 ##
 {{- with $paths }}
-export PATH={{ toStrings $paths | join ":" }}:$PATH
+export PATH=$PATH:{{ $paths | join ":" }}
 {{- end }}
