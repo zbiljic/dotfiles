@@ -7,10 +7,13 @@
 .bin/
 .mirrord/
 
+# exclude '*ignore' files except gitignore
+.*ignore
+!.gitignore
+
 .air.toml
-.env.*
+.env*
 .mise.toml
-.supermavenignore
 *.local
 
 {{ $path := joinPath .chezmoi.homeDir ".gitignore_global_extra" }}
