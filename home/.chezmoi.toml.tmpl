@@ -12,6 +12,10 @@
 {{- end -}}
 
 {{- $hostname := .chezmoi.hostname -}}
+{{/* use stable hostname on macOS */}}
+{{- if eq .chezmoi.os "darwin" }}
+{{- $hostname = output "scutil" "--get" "LocalHostName" | trim | lower -}}
+{{- end }}
 
 {{- if not $ephemeral -}}
 {{-   if (hasPrefix "nemanja" (lower $hostname)) -}}
