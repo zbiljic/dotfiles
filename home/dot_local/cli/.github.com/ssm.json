@@ -1,7 +1,7 @@
 {
     "name": "ssm",
     "url": "https://github.com/lfaoro/ssm",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tgz",
