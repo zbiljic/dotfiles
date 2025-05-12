@@ -4,7 +4,7 @@
     "version": "0.3.4",
     "config": {
         "type": "archive",
-        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tgz",
+        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
         "exact": true
     },
     "remap": {
