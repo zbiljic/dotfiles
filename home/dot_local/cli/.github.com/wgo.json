@@ -1,7 +1,7 @@
 {
     "name": "wgo",
     "url": "https://github.com/bokwoon95/wgo",
-    "version": "0.5.11",
+    "version": "0.5.13",
     "config": {
         "type": "file",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}",
