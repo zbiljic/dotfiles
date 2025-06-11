@@ -13,31 +13,18 @@
 
 .air.toml
 .env*
-.mise.toml
 *.local
+mise.local.toml
 
-# exclude agent rules
-AGENT.md
-AGENTS.md
-CLAUDE.md
-CLAUDE.local.md
-.cursorrules
-.cursor/
-.windsurfrules
-.windsurf/
-.trae/
-.github/copilot-instructions.md
-.clinerules
-clinerules-bank/
-.roomodes
-.roorules
-.roo/
-.kilocode/
-.taskmaster/
-.taskmasterconfig
-
-{{ $path := joinPath .chezmoi.homeDir ".gitignore_global_extra" }}
-{{- if stat $path -}}
-# Extra
-{{ include $path }}
-{{- end -}}
+{{- /* process extra files */ -}}
+{{- $rootDirs := list .chezmoi.sourceDir .chezmoi.homeDir }}
+{{- $paths := list }}
+{{- range $rootDirs }}
+{{-   $paths = concat $paths (glob (joinPath . ".gitignore_global_extra*")) }}
+{{- end }}
+{{ if $paths }}
+## Extra
+{{ range $paths }}
+{{ include . }}
+{{ end -}}
+{{ end -}}

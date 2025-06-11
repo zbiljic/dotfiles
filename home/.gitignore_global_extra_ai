@@ -1,0 +1,19 @@
+# exclude agent rules
+AGENT.md
+AGENTS.md
+CLAUDE.md
+CLAUDE.local.md
+.cursorrules
+.cursor/
+.windsurfrules
+.windsurf/
+.trae/
+.github/copilot-instructions.md
+.clinerules
+clinerules-bank/
+.roomodes
+.roorules
+.roo/
+.kilocode/
+.taskmaster/
+.taskmasterconfig
