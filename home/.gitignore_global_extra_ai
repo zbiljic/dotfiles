@@ -3,6 +3,7 @@ AGENT.md
 AGENTS.md
 CLAUDE.md
 CLAUDE.local.md
+.claude/
 .cursorrules
 .cursor/
 .windsurfrules
@@ -17,3 +18,5 @@ clinerules-bank/
 .kilocode/
 .taskmaster/
 .taskmasterconfig
+.opencode/
+opencode.json
