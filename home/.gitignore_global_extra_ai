@@ -3,12 +3,14 @@ AGENT.md
 AGENTS.md
 CLAUDE.md
 CLAUDE.local.md
+GEMINI.md
 .claude/
 .cursorrules
 .cursor/
 .windsurfrules
 .windsurf/
 .trae/
+.gemini/
 .github/copilot-instructions.md
 .clinerules
 clinerules-bank/
