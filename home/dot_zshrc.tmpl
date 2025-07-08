@@ -17,3 +17,8 @@ eval "$(mise activate zsh)"
 {{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "starship") -}}
 eval "$(starship init zsh)"
 {{- end }}
+
+{{ $path := joinPath .chezmoi.homeDir ".zshrc_extra" }}
+{{- if stat $path }}
+{{ include $path }}
+{{- end }}
