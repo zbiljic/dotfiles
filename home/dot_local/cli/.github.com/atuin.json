@@ -1,7 +1,7 @@
 {
     "name": "atuin",
     "url": "https://github.com/atuinsh/atuin",
-    "version": "18.6.1",
+    "version": "18.7.1",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
