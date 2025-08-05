@@ -1,7 +1,7 @@
 {
     "name": "lazygit",
     "url": "https://github.com/jesseduffield/lazygit",
-    "version": "0.53.0",
+    "version": "0.54.0",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.this.version}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
