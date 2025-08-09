@@ -4,9 +4,10 @@
     "config:recommended",
     ":combinePatchMinorReleases",
     ":separateMultipleMajorReleases",
+    "customManagers:githubActionsVersions",
     ":semanticCommitsDisabled"
   ],
-  "enabledManagers": ["custom.regex"],
+  "enabledManagers": ["custom.regex", "github-actions"],
   "minimumReleaseAge": "3 days",
   "customManagers": [
     {
@@ -39,7 +40,7 @@
   ],
   "packageRules": [
     {
-      "description": "Automerge non-major updates",
+      "description": ["Automerge non-major updates"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
       "automergeStrategy": "rebase",
@@ -51,7 +52,7 @@
       "commitMessageTopic": "{{depName}}"
     },
     {
-      "description": "Slowdown some updates",
+      "description": ["Slowdown some updates"],
       "matchPackageNames": ["/mise/"],
       "schedule": ["before 4am on Monday"]
     }
