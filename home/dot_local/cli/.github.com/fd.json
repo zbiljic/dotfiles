@@ -1,7 +1,7 @@
 {
     "name": "fd",
     "url": "https://github.com/sharkdp/fd",
-    "version": "10.2.0",
+    "version": "10.3.0",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}-v{{.this.version}}-{{.chezmoi.arch}}-{{.chezmoi.os}}.tar.gz",
