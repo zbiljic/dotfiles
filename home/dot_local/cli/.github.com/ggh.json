@@ -1,7 +1,7 @@
 {
     "name": "ggh",
     "url": "https://github.com/byawitz/ggh",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "config": {
         "type": "file",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}_{{.chezmoi.arch}}",
