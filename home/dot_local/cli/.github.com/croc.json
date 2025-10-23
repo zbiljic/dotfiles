@@ -16,5 +16,8 @@
             "amd64": "64bit",
             "arm64": "ARM64"
         }
+    },
+    "condition": {
+        ".chezmoi.config.data.extras": true
     }
 }

@@ -3,6 +3,7 @@
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
 {{- $kubernetes := false -}}{{/* true if this machine is used for Kubernetes work */}}
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
+{{- $extras := false -}}{{/* true if optional extras should be installed */}}
 {{- "" -}}
 
 {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
@@ -53,9 +54,20 @@
 {{-   $personal = true -}}
 {{- end -}}
 
+{{- $extras = not $ephemeral -}}
+{{- if hasKey . "extras" -}}
+{{-   $extras = .extras -}}
+{{- else if and (stdinIsATTY) (not $ephemeral) -}}
+{{-   $extras = promptBoolOnce . "extras" "extras" -}}
+{{- end -}}
+{{- with (env "EXTRAS") -}}
+{{-   $extras = eq (lower .) "true" -}}
+{{- end -}}
+
 [data]
   ephemeral = {{ $ephemeral }}
   headless = {{ $headless }}
   hostname = {{ $hostname | quote }}
   kubernetes = {{ $kubernetes }}
   personal = {{ $personal }}
+  extras = {{ $extras }}
