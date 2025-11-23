@@ -1,0 +1,23 @@
+{
+    "name": "sshm",
+    "url": "https://github.com/Gu1llaum-3/sshm",
+    "version": "1.9.0",
+    "config": {
+        "type": "archive",
+        "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
+        "exact": true
+    },
+    "remap": {
+        ".chezmoi.os": {
+            "darwin": "Darwin",
+            "linux": "Linux"
+        },
+        ".chezmoi.arch": {
+            "amd64": "x86_64",
+            "arm64": "arm64"
+        }
+    },
+    "condition": {
+        ".chezmoi.config.data.ephemeral": false
+    }
+}
