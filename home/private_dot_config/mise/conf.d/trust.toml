@@ -1,0 +1,6 @@
+[settings]
+trusted_config_paths = [
+    '~/dev/e__src__/',
+    '~/dev/wtopic___/',
+    '~/dev/zworks___/',
+]
