@@ -1,7 +1,7 @@
 {
     "name": "yt-dlp",
     "url": "https://github.com/yt-dlp/yt-dlp",
-    "version": "2024.07.16",
+    "version": "2024.12.23",
     "config": {
         "type": "file",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}",
