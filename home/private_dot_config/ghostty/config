@@ -1,5 +1,7 @@
 theme = dracula
 
+macos-titlebar-style = tabs
+
 copy-on-select = clipboard
 
 # Quick Terminal
