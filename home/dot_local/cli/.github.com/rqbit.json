@@ -10,11 +10,7 @@
     "remap": {
         ".chezmoi.os": {
             "darwin": "",
-            "linux": "linux-static"
-        },
-        ".chezmoi.arch": {
-            "amd64": "x86_64",
-            "arm64": "aarch64"
+            "linux": "linux"
         }
     },
     "condition": {
