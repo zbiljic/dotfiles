@@ -34,7 +34,7 @@
         "\"url\":\\s?\"https://github\\.com/(?<depName>.+)\",\\s*\"version\":\\s?\"(?<currentValue>.+)\","
       ],
       "extractVersionTemplate": "^v?(?<version>.*)$",
-      "versioningTemplate": "semver-coerced",
+      "versioningTemplate": "pep440",
       "datasourceTemplate": "github-releases"
     }
   ],
