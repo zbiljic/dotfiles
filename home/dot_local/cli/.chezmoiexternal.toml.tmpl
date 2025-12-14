@@ -1,6 +1,7 @@
 {{ $values := . }}
 
 {{- $githubRootDir := (joinPath .chezmoi.sourceDir "dot_local/cli/.github.com") -}}
+{{- $seen := dict -}}
 
 {{- /* include GitHub external */ -}}
 {{- $externalGithub := glob (joinPath $githubRootDir "*json") }}
@@ -12,5 +13,12 @@
 {{-   $values_copy := $values | deepCopy }}
 {{-   $_ := set $values_copy "this" $external }}
 {{- /* include entry */ -}}
-{{    includeTemplate "external_github.toml.tmpl" (dict "val" $values_copy "path" (osBase $path)) }}
+{{-   $name := default "" $external.name }}
+{{-   if not (hasKey $seen $name) }}
+{{-     $entry := includeTemplate "external_github.toml.tmpl" (dict "val" $values_copy "path" (osBase $path)) }}
+{{-     if (trim $entry) }}
+{{        $entry }}
+{{-       $_ := set $seen $name true }}
+{{-     end }}
+{{-   end }}
 {{- end -}} {{/* range $_, $path := $externalGithub */}}
