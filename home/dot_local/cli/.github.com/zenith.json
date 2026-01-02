@@ -4,17 +4,17 @@
     "version": "0.14.2",
     "config": {
         "type": "archive",
-        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}.{{.chezmoi.arch}}-{{.chezmoi.os}}.tgz",
+        "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
         "exact": true
     },
     "remap": {
         ".chezmoi.os": {
-            "darwin": "apple-darwin",
-            "linux": ""
+            "darwin": "macOS",
+            "linux": "Linux-musl"
         },
         ".chezmoi.arch": {
             "amd64": "x86_64",
-            "arm64": "aarch64"
+            "arm64": "arm64"
         }
     }
 }
