@@ -1,2 +1,5 @@
 [tools]
 node = 'lts'
+
+# extra
+"github:bokwoon95/wgo" = "0.6.2"
