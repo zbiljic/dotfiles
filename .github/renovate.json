@@ -12,8 +12,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Update Chezmoi version",
-      "fileMatch": [
+      "description": ["Update Chezmoi version"],
+      "managerFilePatterns": [
         ".chezmoiversion"
       ],
       "matchStrings": [
@@ -26,9 +26,9 @@
     },
     {
       "customType": "regex",
-      "description": "Update GitHub packages",
-      "fileMatch": [
-        ".*/\\.github\\.com/.*\\.json"
+      "description": ["Update GitHub packages"],
+      "managerFilePatterns": [
+        "//\\.github\\.com/.+\\.json/"
       ],
       "matchStrings": [
         "\"url\":\\s?\"https://github\\.com/(?<depName>.+)\",\\s*\"version\":\\s?\"(?<currentValue>.+)\","
