@@ -1,4 +1,0 @@
-{{ $path := joinPath .chezmoi.homeDir ".local/cli/godotenv/godotenv" }}
-{{ if stat $path }}
-{{   $path }}
-{{ end }}
