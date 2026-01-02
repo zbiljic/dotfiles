@@ -7,7 +7,7 @@
     "customManagers:githubActionsVersions",
     ":semanticCommitsDisabled"
   ],
-  "enabledManagers": ["custom.regex", "github-actions"],
+  "enabledManagers": ["custom.regex", "github-actions", "mise"],
   "minimumReleaseAge": "3 days",
   "customManagers": [
     {
@@ -36,6 +36,20 @@
       "extractVersionTemplate": "^v?(?<version>.*)$",
       "versioningTemplate": "pep440",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "description": ["Update mise GitHub packages"],
+      "managerFilePatterns": [
+        "/(^|/)\\.?mise\\.toml$/",
+        "/(^|/)\\.?mise/config\\.toml$/",
+        "/(^|/)\\.?mise/conf\\.d/.+\\.toml$/"
+      ],
+      "matchStrings": [
+        "\"github:(?<depName>[^\"]+)\"\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "versioningTemplate": "pep440",
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
@@ -56,5 +70,12 @@
       "matchPackageNames": ["/mise/"],
       "schedule": ["before 4am on Monday"]
     }
-  ]
+  ],
+  "mise": {
+    "managerFilePatterns": [
+      "/(^|/)\\.?mise\\.toml$/",
+      "/(^|/)\\.?mise/config\\.toml$/",
+      "/(^|/)\\.?mise/conf\\.d/.+\\.toml$/"
+    ]
+  }
 }
