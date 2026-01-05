@@ -1,0 +1,21 @@
+at0() {
+    # calculate sleep time using python for float precision
+    local wait_time=$(python3 -c "import time; t=time.time(); print(10 - (t % 10))")
+
+    echo "Waiting ${wait_time}s for next 10s mark..."
+    sleep "$wait_time"
+
+    # execute the passed command with original arguments
+    "$@"
+}
+
+at00() {
+    # calculate sleep time using python for float precision
+    local wait_time=$(python3 -c "import time; t=time.time(); print(60 - (t % 60))")
+
+    echo "Waiting ${wait_time}s for exact minute..."
+    sleep "$wait_time"
+
+    # execute the passed command with original arguments
+    "$@"
+}
