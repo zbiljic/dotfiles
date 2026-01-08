@@ -1,7 +1,7 @@
 {
     "name": "sshm",
     "url": "https://github.com/Gu1llaum-3/sshm",
-    "version": "1.9.0",
+    "version": "1.10.0",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/v{{.this.version}}/{{.this.name}}_{{.chezmoi.os}}_{{.chezmoi.arch}}.tar.gz",
