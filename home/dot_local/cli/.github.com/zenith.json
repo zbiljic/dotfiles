@@ -1,7 +1,7 @@
 {
     "name": "zenith",
     "url": "https://github.com/bvaisvil/zenith",
-    "version": "0.14.2",
+    "version": "0.14.3",
     "config": {
         "type": "archive",
         "url": "{{.this.url}}/releases/download/{{.this.version}}/{{.this.name}}-{{.chezmoi.os}}-{{.chezmoi.arch}}.tar.gz",
