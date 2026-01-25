@@ -1,4 +1,4 @@
 [tools]
 "github:bokwoon95/wgo" = "0.6.2"
 "github:joho/godotenv" = "1.5.1"
-"npm:critique" = "0.1.41"
+"npm:critique" = "0.1.42"
