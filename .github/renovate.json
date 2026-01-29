@@ -67,7 +67,7 @@
     },
     {
       "description": ["Slowdown some updates"],
-      "matchPackageNames": ["/mise/"],
+      "matchPackageNames": ["/mise/", "/critique/"],
       "schedule": ["before 4am on Monday"]
     }
   ],
