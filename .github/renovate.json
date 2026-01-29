@@ -61,7 +61,7 @@
       "automergeType": "branch"
     },
     {
-      "matchManagers": ["custom.regex"],
+      "matchManagers": ["custom.regex", "mise"],
       "commitMessageAction": "update",
       "commitMessageTopic": "{{depName}}"
     },
