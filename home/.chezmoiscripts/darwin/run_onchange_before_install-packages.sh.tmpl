@@ -28,9 +28,13 @@ fi
     "wget"
 -}}
 
-{{ $casks := list
-    "aware"
+{{ $casks_system := list
     "font-jetbrains-mono-nerd-font"
+    "visual-studio-code"
+-}}
+
+{{ $casks_user := list
+    "aware"
     "fork"
     "ghostty"
     "jordanbaird-ice"
@@ -39,7 +43,6 @@ fi
     "rectangle"
     "stats"
     "stolendata-mpv"
-    "visual-studio-code"
     "wezterm"
 -}}
 
@@ -51,15 +54,19 @@ fi
 {{ end -}}
 
 {{ if .personal -}}
-{{   $casks = concat $casks (list
+{{   $casks_user = concat $casks_user (list
        "airflow"
        "glide-browser"
        "google-chrome@dev"
        "keepassxc"
        "obsidian"
+     ) -}}
+{{   $casks_system = concat $casks_system (list
        "tailscale-app"
      ) -}}
 {{ end -}}
+
+mkdir -p "$HOME/Applications"
 
 brew bundle --file=/dev/stdin <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}
@@ -68,7 +75,12 @@ tap "{{ . }}"
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
-{{ range ($casks | sortAlpha | uniq) -}}
+cask_args appdir: "/Applications"
+{{ range ($casks_system | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+cask_args appdir: "~/Applications"
+{{ range ($casks_user | sortAlpha | uniq) -}}
 cask "{{ . }}"
 {{ end -}}
 EOF
