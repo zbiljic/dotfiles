@@ -17,10 +17,11 @@
 mise.local.toml
 
 {{- /* process extra files */ -}}
+{{- $extraPathGlob := (printf "%s_extra*" .chezmoi.targetFile | base) }}
 {{- $rootDirs := list .chezmoi.sourceDir .chezmoi.homeDir }}
 {{- $paths := list }}
 {{- range $rootDirs }}
-{{-   $paths = concat $paths (glob (joinPath . ".gitignore_global_extra*")) }}
+{{-   $paths = concat $paths (glob (joinPath . $extraPathGlob)) }}
 {{- end }}
 {{ if $paths }}
 ## Extra

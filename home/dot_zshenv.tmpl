@@ -18,7 +18,7 @@ export WORDCHARS='*_-.[]~=/&;!#$%^(){}<>'
 
 export ZDOTDIR=$HOME
 
-{{ $path := joinPath .chezmoi.homeDir ".zshenv_extra" }}
+{{ $path := printf "%s_extra" .chezmoi.targetFile }}
 {{- if stat $path }}
 {{ include $path }}
 {{- end }}

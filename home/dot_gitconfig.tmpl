@@ -76,7 +76,7 @@
     insteadOf = https://github.com/zbiljic/
 {{- end }}
 
-{{ $path := joinPath .chezmoi.homeDir ".gitconfig_extra" }}
+{{ $path := printf "%s_extra" .chezmoi.targetFile }}
 {{- if stat $path }}
 {{ include $path }}
 {{- end }}

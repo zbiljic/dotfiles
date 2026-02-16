@@ -26,7 +26,7 @@ eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 {{- end }}
 
-{{ $path := joinPath .chezmoi.homeDir ".zshrc_extra" }}
+{{ $path := printf "%s_extra" .chezmoi.targetFile }}
 {{- if stat $path }}
 {{ include $path }}
 {{- end }}
