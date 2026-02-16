@@ -4,6 +4,9 @@ AGENTS.md
 CLAUDE.md
 CLAUDE.local.md
 GEMINI.md
+.agent/
+.agents/
+docs/plans/
 .claude/
 .cursorrules
 .cursor/
