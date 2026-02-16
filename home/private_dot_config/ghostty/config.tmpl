@@ -11,3 +11,8 @@ quick-terminal-animation-duration = 0.1
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 keybind = shift+enter=text:\n
+
+{{ $path := printf "%s_extra" .chezmoi.targetFile }}
+{{- if stat $path -}}
+{{ include $path }}
+{{- end }}
