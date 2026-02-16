@@ -1,3 +1,11 @@
+{{- $zshProfiling := false -}}
+{{- with (env "CHEZMOI_ZSH_PROFILING") -}}
+{{-   $zshProfiling = or (eq . "1") (eq (lower .) "true") -}}
+{{- end -}}
+{{ if $zshProfiling -}}
+zmodload zsh/zprof
+{{- end }}
+
 # ZSH options
 setopt histignoredups
 setopt histignorespace
@@ -21,4 +29,8 @@ eval "$(starship init zsh)"
 {{ $path := joinPath .chezmoi.homeDir ".zshrc_extra" }}
 {{- if stat $path }}
 {{ include $path }}
+{{- end }}
+
+{{- if $zshProfiling -}}
+zprof
 {{- end }}
