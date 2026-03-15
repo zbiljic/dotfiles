@@ -9,14 +9,17 @@ Host *
 
 {{ if .personal -}}
 Host raspberrypi
+  #!! UdpMode Yes
   HostName raspberrypi
   User nemanjaz
 
 Host minim1
+  #!! UdpMode Yes
   HostName nemanjas-mac-mini-m1
   User nemanjaz
 
 Host maxm1
+  #!! UdpMode Yes
   HostName nemanjas-mac-studio-m1
   User nemanjaz
 {{ end -}}
