@@ -35,6 +35,15 @@ defaults write NSGlobalDomain AppleInterfaceStyle Dark
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
+# Reduce spacing between menu bar items
+# Reference: https://flaky.build/built-in-workaround-for-applications-hiding-under-the-macbook-pro-notch
+defaults write -globalDomain NSStatusItemSelectionPadding -int 8
+defaults write -globalDomain NSStatusItemSpacing -int 8
+#ps -A | grep Core | grep -v grep | awk '{ print $1 }' | xargs kill -9
+# # Revert to the original values
+# defaults delete -globalDomain NSStatusItemSelectionPadding
+# defaults delete -globalDomain NSStatusItemSpacing
+
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
