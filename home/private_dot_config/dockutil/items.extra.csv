@@ -2,4 +2,4 @@
 # type: app | folder | url | spacer
 # view/display/sort apply to folder stacks; leave empty otherwise.
 # edit this list to control Dock contents and order
-apps,Airflow,/Applications/Airflow.app,app,,,
+apps,Airflow,~/Applications/Airflow.app,app,,,
