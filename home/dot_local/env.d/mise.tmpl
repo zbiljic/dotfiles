@@ -1,0 +1,3 @@
+{{ if stat (joinPath .chezmoi.homeDir ".local/czbin" "mise") -}}
+export PATH="{{ joinPath .chezmoi.homeDir ".local/share/mise/shims" }}:$PATH"
+{{ end -}}
