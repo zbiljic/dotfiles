@@ -1,0 +1,22 @@
+# section,label,path,type,view,display,sort
+# type: app | folder | url | spacer
+# view/display/sort apply to folder stacks; leave empty otherwise.
+# edit this list to control Dock contents and order
+apps,Finder,/System/Library/CoreServices/Finder.app,app,,,
+apps,Apps,/System/Applications/Apps.app,app,,,
+apps,Safari,/System/Applications/Safari.app,app,,,
+apps,Messages,/System/Applications/Messages.app,app,,,
+apps,Calendar,/System/Applications/Calendar.app,app,,,
+apps,Contacts,/System/Applications/Contacts.app,app,,,
+apps,Reminders,/System/Applications/Reminders.app,app,,,
+apps,Notes,/System/Applications/Notes.app,app,,,
+apps,Podcasts,/System/Applications/Podcasts.app,app,,,
+apps,App Store,/System/Applications/App Store.app,app,,,
+apps,System Settings,/System/Applications/System Settings.app,app,,,
+apps,Ghostty,/Applications/Ghostty.app,app,,,
+apps,Visual Studio Code,/Applications/Visual Studio Code.app,app,,,
+apps,Google Chrome Dev,/Applications/Google Chrome Dev.app,app,,,
+apps,Helium,/Applications/Helium.app,app,,,
+apps,Glide,/Applications/Glide.app,app,,,
+others,Downloads,$HOME/Downloads,folder,stack,folder,dateadded
+others,Trash,,,,
