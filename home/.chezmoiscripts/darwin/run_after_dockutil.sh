@@ -13,6 +13,7 @@ if ! command -v dockutil >/dev/null; then
 fi
 
 DOCK_ITEMS_FILE="${DOCK_ITEMS_FILE:-$HOME/.config/dockutil/items.csv}"
+DOCK_ITEMS_PREFIX="${DOCK_ITEMS_FILE%.csv}"
 # Opt-in full reset; default to targeted removals only.
 DOCKUTIL_RESET_ALL="${DOCKUTIL_RESET_ALL:-false}"
 
@@ -42,34 +43,56 @@ trim() {
 declare -A DESIRED PATHS TYPES VIEWS DISPLAYS SORTS PRESENT RECENT
 declare -a ORDER_APPS=()
 declare -a ORDER_OTHERS=()
+declare -a DOCK_ITEM_FILES=("${DOCK_ITEMS_FILE}")
 
-while IFS=',' read -r section label path type view display sort; do
-  section="$(trim "${section}")"
-  label="$(trim "${label}")"
-  path="$(trim "${path}")"
-  type="$(trim "${type:-app}")"
-  view="$(trim "${view}")"
-  display="$(trim "${display}")"
-  sort="$(trim "${sort}")"
+shopt -s nullglob
+for extra_file in \
+  "${DOCK_ITEMS_PREFIX}.extra.csv" \
+  "${DOCK_ITEMS_PREFIX}.extra."*.csv \
+  "${DOCK_ITEMS_PREFIX}.local.csv" \
+  "${DOCK_ITEMS_PREFIX}.local."*.csv; do
+  [[ -f "${extra_file}" ]] || continue
+  DOCK_ITEM_FILES+=("${extra_file}")
+done
+shopt -u nullglob
 
-  [[ -z "${section}" ]] && continue
-  [[ "${section}" == section ]] && continue
-  [[ "${section:0:1}" == "#" ]] && continue
+read_items_file() {
+  local items_file="${1}"
 
-  case "${section}" in
-    apps) ORDER_APPS+=("${label}") ;;
-    others) ORDER_OTHERS+=("${label}") ;;
-    *) echo "warning: unsupported section '${section}', skipping" >&2; continue ;;
-  esac
+  echo "Loading dock items from ${items_file}"
 
-  key="${section}:${label}"
-  DESIRED["${key}"]=1
-  PATHS["${key}"]="${path}"
-  TYPES["${key}"]="${type}"
-  VIEWS["${key}"]="${view}"
-  DISPLAYS["${key}"]="${display}"
-  SORTS["${key}"]="${sort}"
-done < "${DOCK_ITEMS_FILE}"
+  while IFS=',' read -r section label path type view display sort; do
+    section="$(trim "${section}")"
+    label="$(trim "${label}")"
+    path="$(trim "${path}")"
+    type="$(trim "${type:-app}")"
+    view="$(trim "${view}")"
+    display="$(trim "${display}")"
+    sort="$(trim "${sort}")"
+
+    [[ -z "${section}" ]] && continue
+    [[ "${section}" == section ]] && continue
+    [[ "${section:0:1}" == "#" ]] && continue
+
+    case "${section}" in
+      apps) ORDER_APPS+=("${label}") ;;
+      others) ORDER_OTHERS+=("${label}") ;;
+      *) echo "warning: unsupported section '${section}' in ${items_file}, skipping" >&2; continue ;;
+    esac
+
+    key="${section}:${label}"
+    DESIRED["${key}"]=1
+    PATHS["${key}"]="${path}"
+    TYPES["${key}"]="${type}"
+    VIEWS["${key}"]="${view}"
+    DISPLAYS["${key}"]="${display}"
+    SORTS["${key}"]="${sort}"
+  done < "${items_file}"
+}
+
+for items_file in "${DOCK_ITEM_FILES[@]}"; do
+  read_items_file "${items_file}"
+done
 
 if [[ "${DOCKUTIL_RESET_ALL}" == "true" || "${DOCKUTIL_RESET_ALL}" == "1" ]]; then
   echo "Resetting Dock persistent sections before syncing..."
