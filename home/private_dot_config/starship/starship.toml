@@ -67,7 +67,7 @@ symbol = '↕️ '
 disabled = false
 
 [sudo]
-disabled = false
+disabled = true
 
 [terraform]
 format = 'via [$symbol]($style) '
