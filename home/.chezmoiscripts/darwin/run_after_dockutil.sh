@@ -41,9 +41,13 @@ trim() {
 }
 
 declare -A DESIRED PATHS TYPES VIEWS DISPLAYS SORTS PRESENT RECENT
+declare -A CURRENT_POS
 declare -a ORDER_APPS=()
 declare -a ORDER_OTHERS=()
 declare -a DOCK_ITEM_FILES=("${DOCK_ITEMS_FILE}")
+DOCK_CHANGED=false
+apps_position=0
+others_position=0
 
 shopt -s nullglob
 for extra_file in \
@@ -96,6 +100,7 @@ done
 
 if [[ "${DOCKUTIL_RESET_ALL}" == "true" || "${DOCKUTIL_RESET_ALL}" == "1" ]]; then
   echo "Resetting Dock persistent sections before syncing..."
+  DOCK_CHANGED=true
   dockutil --remove all --section apps --no-restart || true
   dockutil --remove all --section others --no-restart || true
 else
@@ -108,14 +113,24 @@ while IFS=$'\t' read -r item path section plist; do
   [[ -z "${item}" || -z "${section}" ]] && continue
 
   case "${section}" in
-    apps | persistentApps) section_key="apps" ;;
-    others | persistentOthers) section_key="others" ;;
+    apps | persistentApps)
+      section_key="apps"
+      ((++apps_position))
+      ;;
+    others | persistentOthers)
+      section_key="others"
+      ((++others_position))
+      ;;
     recent | recentApps) RECENT["${item}"]=1; continue ;;
     *) continue ;;
   esac
 
   key="${section_key}:${item}"
   PRESENT["${key}"]="${path}"
+  case "${section_key}" in
+    apps) CURRENT_POS["${key}"]="${apps_position}" ;;
+    others) CURRENT_POS["${key}"]="${others_position}" ;;
+  esac
 
   if [[ -z "${DESIRED[${key}]+x}" ]]; then
     # avoid removing Dock anchors
@@ -125,6 +140,7 @@ while IFS=$'\t' read -r item path section plist; do
 
     expanded_path="$(expand_path "${path}")"
     echo "Removing '${item}' from ${section_key}"
+    DOCK_CHANGED=true
     dockutil --remove "${item}" --no-restart \
       || dockutil --remove "${expanded_path}" --no-restart \
       || true
@@ -190,6 +206,7 @@ add_item() {
   esac
 
   echo "Adding '${label}' to ${section}"
+  DOCK_CHANGED=true
   "${cmd[@]}"
   PRESENT["${key}"]="${target}"
 }
@@ -213,6 +230,12 @@ reorder_section() {
     [[ -z "${PRESENT[${key}]+x}" ]] && continue
     [[ "${label}" == "Finder" || "${label}" == "Trash" ]] && { ((position++)); continue; }
 
+    if [[ "${DOCK_CHANGED}" == "false" && "${CURRENT_POS[${key}]:-}" == "${position}" ]]; then
+      ((position++))
+      continue
+    fi
+
+    DOCK_CHANGED=true
     dockutil --move "${label}" --section "${section}" --position "${position}" --no-restart || true
     ((position++))
   done
@@ -221,7 +244,16 @@ reorder_section() {
 reorder_section "apps" "${ORDER_APPS[@]}"
 reorder_section "others" "${ORDER_OTHERS[@]}"
 
-defaults write com.apple.dock show-recents -bool true
+current_show_recents="$(defaults read com.apple.dock show-recents 2>/dev/null || printf '0')"
+if [[ "${current_show_recents}" != "1" && "${current_show_recents}" != "true" ]]; then
+  defaults write com.apple.dock show-recents -bool true
+  DOCK_CHANGED=true
+fi
+
+if [[ "${DOCK_CHANGED}" != "true" ]]; then
+  echo "Dock is already up to date."
+  exit 0
+fi
 
 echo "Restarting Dock to commit batch..."
 
