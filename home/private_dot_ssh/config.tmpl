@@ -8,20 +8,27 @@ Host *
 {{- end }}
 
 {{ if .personal -}}
+{{- $localHostname := .hostname }}
+{{- if ne $localHostname "raspberrypi" }}
 Host raspberrypi
   #!! UdpMode Yes
   HostName raspberrypi
   User nemanjaz
+{{ end }}
 
+{{- if ne $localHostname "nemanjas-mac-mini-m1" }}
 Host minim1
   #!! UdpMode Yes
   HostName nemanjas-mac-mini-m1
   User nemanjaz
+{{ end }}
 
+{{- if ne $localHostname "nemanjas-mac-studio-m1" }}
 Host maxm1
   #!! UdpMode Yes
   HostName nemanjas-mac-studio-m1
   User nemanjaz
+{{ end }}
 {{ end -}}
 
 {{ $path := printf "%s_extra" .chezmoi.targetFile }}
