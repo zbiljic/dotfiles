@@ -33,6 +33,34 @@ expand_path() {
   printf '%s' "${value}"
 }
 
+resolve_path() {
+  local target
+  local alt=""
+
+  target="$(expand_path "${1:-}")"
+
+  if [[ -z "${target}" || -e "${target}" || "${target}" != *.app ]]; then
+    printf '%s' "${target}"
+    return 0
+  fi
+
+  case "${target}" in
+    /Applications/*.app)
+      alt="${HOME}/Applications/${target#/Applications/}"
+      ;;
+    "${HOME}"/Applications/*.app)
+      alt="/Applications/${target#"${HOME}/Applications/"}"
+      ;;
+  esac
+
+  if [[ -n "${alt}" && -e "${alt}" ]]; then
+    printf '%s' "${alt}"
+    return 0
+  fi
+
+  printf '%s' "${target}"
+}
+
 trim() {
   local value="${1:-}"
   value="${value#"${value%%[![:space:]]*}"}"
@@ -174,7 +202,7 @@ add_item() {
   [[ -n "${PRESENT[${key}]+x}" ]] && return 0
 
   local target
-  target="$(expand_path "${raw_path}")"
+  target="$(resolve_path "${raw_path}")"
 
   if [[ "${type}" != "spacer" && -z "${target}" ]]; then
     echo "Skipping '${label}' (no path provided)"
