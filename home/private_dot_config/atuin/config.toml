@@ -4,3 +4,6 @@ workspaces = true
 invert = true
 inline_height = 30
 enter_accept = true
+
+[ai]
+enabled = true
