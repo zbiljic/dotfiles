@@ -4,6 +4,7 @@
     editor = nano
     excludesfile = ~/.gitignore_global
     autocrlf = input
+    hooksPath = ~/.local/share/git/hooks
 [init]
     defaultBranch = main
 [branch]
@@ -30,9 +31,16 @@
 [help]
     autocorrect = prompt
 
+[round-commit-date]
+    enabled = true
+    stepSeconds = 60
+
 [alias]
     co = checkout
     ci = commit
+    ci-plain = -c round-commit-date.enabled=false commit
+    ci0 = -c round-commit-date.stepSeconds=10 commit
+    ci00 = -c round-commit-date.stepSeconds=60 commit
     st = status
     stu = status -uno
     br = branch
