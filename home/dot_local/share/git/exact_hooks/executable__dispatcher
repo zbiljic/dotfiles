@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+
+set -u
+
+hook_name=$(basename "$0")
+
+dispatch_local_hook() {
+    local git_dir local_hook
+
+    if [[ "${GIT_ROUND_COMMIT_DATE_APPLYING:-0}" == "1" && "$hook_name" != "post-commit" ]]; then
+        return 0
+    fi
+
+    git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || return 0
+    local_hook="$git_dir/hooks/$hook_name"
+
+    if [[ ! -x "$local_hook" ]]; then
+        return 0
+    fi
+
+    if [[ "$local_hook" -ef "$0" ]]; then
+        return 0
+    fi
+
+    "$local_hook" "$@"
+}
+
+round_commit_date_step() {
+    local step
+
+    if [[ -n "${GIT_ROUND_COMMIT_DATE_STEP_SECONDS:-}" ]]; then
+        step="${GIT_ROUND_COMMIT_DATE_STEP_SECONDS}"
+    else
+        step=$(git config --type=int --default 0 round-commit-date.stepSeconds 2>/dev/null || printf '0\n')
+    fi
+
+    if [[ ! "$step" =~ ^[1-9][0-9]*$ ]]; then
+        return 1
+    fi
+
+    printf '%s\n' "$step"
+}
+
+in_rebase_or_sequencer_state() {
+    local git_dir
+
+    git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || return 1
+
+    [[ -d "$git_dir/rebase-apply" ]] && return 0
+    [[ -d "$git_dir/rebase-merge" ]] && return 0
+    [[ -f "$git_dir/REBASE_HEAD" ]] && return 0
+    [[ -f "$git_dir/CHERRY_PICK_HEAD" ]] && return 0
+    [[ -f "$git_dir/REVERT_HEAD" ]] && return 0
+
+    return 1
+}
+
+maybe_round_post_commit() {
+    local enabled_env enabled normalized_enabled_env step now_epoch previous_epoch base_epoch target_epoch timezone_offset target_date
+
+    if [[ "${GIT_ROUND_COMMIT_DATE_APPLYING:-0}" == "1" ]]; then
+        return 1
+    fi
+
+    if in_rebase_or_sequencer_state; then
+        return 1
+    fi
+
+    enabled_env="${GIT_ROUND_COMMIT_DATE_ENABLED:-}"
+    if [[ -n "$enabled_env" ]]; then
+        normalized_enabled_env=$(printf '%s' "$enabled_env" | tr '[:upper:]' '[:lower:]')
+        case "$normalized_enabled_env" in
+            1|true|yes|on) enabled=true ;;
+            0|false|no|off) enabled=false ;;
+            *) enabled=$(git config --bool --default true round-commit-date.enabled 2>/dev/null || printf 'true\n') ;;
+        esac
+    else
+        enabled=$(git config --bool --default true round-commit-date.enabled 2>/dev/null || printf 'true\n')
+    fi
+
+    if [[ "$enabled" != "true" ]]; then
+        return 1
+    fi
+
+    step=$(round_commit_date_step) || return 1
+    now_epoch=$(date +%s)
+    previous_epoch=$(git log -1 --skip=1 --format=%ct 2>/dev/null || printf '0\n')
+    base_epoch=$now_epoch
+
+    if [[ "$previous_epoch" =~ ^[0-9]+$ ]] && (( previous_epoch > base_epoch )); then
+        base_epoch=$previous_epoch
+    fi
+
+    target_epoch=$(( ((base_epoch / step) + 1) * step ))
+    timezone_offset=$(date +%z)
+    target_date="$target_epoch $timezone_offset"
+
+    if ! GIT_ROUND_COMMIT_DATE_APPLYING=1 \
+        GIT_AUTHOR_DATE="$target_date" \
+        GIT_COMMITTER_DATE="$target_date" \
+        git commit --amend --no-edit --no-verify --date="$target_date" --quiet >/dev/null; then
+        printf 'round-commit-date: failed to rewrite %s\n' "$hook_name" >&2
+        return 1
+    fi
+
+    return 0
+}
+
+if [[ "$hook_name" == "post-commit" ]] && maybe_round_post_commit; then
+    exit 0
+fi
+
+dispatch_local_hook "$@"
