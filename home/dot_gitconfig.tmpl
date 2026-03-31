@@ -4,6 +4,9 @@
     editor = nano
     excludesfile = ~/.gitignore_global
     autocrlf = input
+    # This replaces Git's default per-repo .git/hooks lookup.
+    # Our global hooks restore only a trimmed whitelist of hook names and forward those to .git/hooks/<name>.
+    # post-commit is special: it runs the rounded timestamp logic first, then forwards the repo-local post-commit.
     hooksPath = ~/.local/share/git/hooks
 [init]
     defaultBranch = main

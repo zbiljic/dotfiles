@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -u
+
+hook_name=$(basename "$0")
+
+if [[ "${GIT_ROUND_COMMIT_DATE_APPLYING:-0}" == "1" ]]; then
+    exit 0
+fi
+
+if [[ -n "${GIT_DIR:-}" ]]; then
+    if [[ "$GIT_DIR" == /* ]]; then
+        git_dir="$GIT_DIR"
+    else
+        git_dir="$PWD/$GIT_DIR"
+    fi
+else
+    git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
+fi
+
+local_hook="$git_dir/hooks/$hook_name"
+
+if [[ ! -x "$local_hook" ]]; then
+    exit 0
+fi
+
+if [[ "$local_hook" -ef "$0" ]]; then
+    exit 0
+fi
+
+exec "$local_hook" "$@"

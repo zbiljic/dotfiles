@@ -4,15 +4,24 @@ set -u
 
 hook_name=$(basename "$0")
 
-dispatch_local_hook() {
-    local git_dir local_hook
-
-    if [[ "${GIT_ROUND_COMMIT_DATE_APPLYING:-0}" == "1" && "$hook_name" != "post-commit" ]]; then
+git_dir_path() {
+    if [[ -n "${GIT_DIR:-}" ]]; then
+        if [[ "$GIT_DIR" == /* ]]; then
+            printf '%s\n' "$GIT_DIR"
+        else
+            printf '%s\n' "$PWD/$GIT_DIR"
+        fi
         return 0
     fi
 
-    git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || return 0
-    local_hook="$git_dir/hooks/$hook_name"
+    git rev-parse --absolute-git-dir 2>/dev/null
+}
+
+dispatch_local_post_commit() {
+    local git_dir local_hook
+
+    git_dir=$(git_dir_path) || return 0
+    local_hook="$git_dir/hooks/post-commit"
 
     if [[ ! -x "$local_hook" ]]; then
         return 0
@@ -44,7 +53,7 @@ round_commit_date_step() {
 in_rebase_or_sequencer_state() {
     local git_dir
 
-    git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || return 1
+    git_dir=$(git_dir_path) || return 1
 
     [[ -d "$git_dir/rebase-apply" ]] && return 0
     [[ -d "$git_dir/rebase-merge" ]] && return 0
@@ -110,4 +119,4 @@ if [[ "$hook_name" == "post-commit" ]] && maybe_round_post_commit; then
     exit 0
 fi
 
-dispatch_local_hook "$@"
+dispatch_local_post_commit "$@"
