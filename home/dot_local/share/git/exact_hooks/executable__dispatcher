@@ -64,6 +64,14 @@ in_rebase_or_sequencer_state() {
     return 1
 }
 
+has_explicit_commit_date_override() {
+    # Git populates GIT_AUTHOR_DATE in post-commit even for ordinary commits,
+    # so only GIT_COMMITTER_DATE is a reliable explicit override signal here.
+    [[ -n "${GIT_COMMITTER_DATE:-}" ]] && return 0
+
+    return 1
+}
+
 maybe_round_post_commit() {
     local enabled_env enabled normalized_enabled_env step now_epoch previous_epoch base_epoch target_epoch timezone_offset target_date
 
@@ -72,6 +80,10 @@ maybe_round_post_commit() {
     fi
 
     if in_rebase_or_sequencer_state; then
+        return 1
+    fi
+
+    if has_explicit_commit_date_override; then
         return 1
     fi
 
