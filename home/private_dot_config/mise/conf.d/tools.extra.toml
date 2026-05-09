@@ -1,5 +1,5 @@
 [tools]
-"github:bokwoon95/wgo" = "v0.6.3"
+"github:bokwoon95/wgo" = "v0.6.4"
 "github:joho/godotenv" = "1.5.1"
 "github:junegunn/fzf" = "0.72.0"
 "github:kavehtehrani/cloudflare-speed-cli" = "0.6.8"
