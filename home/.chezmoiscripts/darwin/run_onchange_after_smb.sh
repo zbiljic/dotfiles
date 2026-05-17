@@ -2,6 +2,11 @@
 
 set -eufo pipefail
 
+if [[ " $(id -Gn) " != *" admin "* ]]; then
+    echo "Current user is not in the admin group, skipping..."
+    exit 0
+fi
+
 NSMB_CONF="/private/etc/nsmb.conf"
 NSMB_BACKUP="${NSMB_CONF}.pre-dotfiles.bak"
 NSMB_CHANGED=false
