@@ -2,7 +2,7 @@
 "github:bokwoon95/wgo" = "v0.6.4"
 "github:joho/godotenv" = "1.5.1"
 "github:junegunn/fzf" = "0.72.0"
-"github:kavehtehrani/cloudflare-speed-cli" = "0.6.10"
+"github:kavehtehrani/cloudflare-speed-cli" = "0.6.11"
 "github:sxyazi/yazi" = "26.5.6"
 "github:trasta298/keifu" = "0.3.0"
 "github:trzsz/trzsz-ssh" = "0.1.25"
