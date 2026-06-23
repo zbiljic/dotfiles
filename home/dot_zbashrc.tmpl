@@ -1,5 +1,8 @@
 {{- if eq .chezmoi.os "linux" }}
-{{-   $idLikeList := splitList " " (default .chezmoi.osRelease.id (get .chezmoi.osRelease "idLike")) }}
+
+{{- includeTemplate ".sh_env.tmpl" . }}
+
+{{   $idLikeList := splitList " " (default .chezmoi.osRelease.id (get .chezmoi.osRelease "idLike")) }}
 {{-   if has "debian" $idLikeList }}
 {{-     include ".bashrc_linux_debian" }}
 {{-   else if has "rhel" $idLikeList }}
@@ -7,8 +10,6 @@
 {{-   else }}
 {{-     include ".bashrc_linux" }}
 {{-   end }}
-
-{{- includeTemplate ".sh_env.tmpl" . }}
 
 if [ -f ~/.sh_aliases ]; then
    . ~/.sh_aliases
