@@ -9,6 +9,10 @@ next_workspace = ["prefix+shift+right", "ctrl+cmd+]"]
 previous_tab = ["prefix+p", "alt+left", "ctrl+alt+["]
 next_tab = ["prefix+n", "alt+right", "ctrl+alt+]"]
 
+previous_agent = "ctrl+shift+["
+next_agent = "ctrl+shift+]"
+rename_tab = "prefix+comma"
+
 focus_pane_left = ["prefix+h", "cmd+alt+left"]
 focus_pane_down = ["prefix+j", "alt+down", "cmd+alt+down"]
 focus_pane_up = ["prefix+k", "alt+up", "cmd+alt+up"]
@@ -17,3 +21,6 @@ focus_pane_right = ["prefix+l", "cmd+alt+right"]
 split_vertical = ["prefix+v", "cmd+d"]
 split_horizontal = ["prefix+minus", "cmd+shift+d"]
 zoom = ["prefix+z", "cmd+shift+enter"]
+
+[ui]
+prompt_new_tab_name = false
