@@ -39,11 +39,23 @@
     },
     {
       "customType": "regex",
+      "description": ["Update version variables"],
+      "managerFilePatterns": [
+        "/(^|/)\\.?mise/conf\\.d/.+\\.toml(\\.tmpl)?$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s*[A-Z0-9_]+\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "extractVersionTemplate": "^v?(?<version>.*)$",
+      "versioningTemplate": "pep440"
+    },
+    {
+      "customType": "regex",
       "description": ["Update mise GitHub packages"],
       "managerFilePatterns": [
         "/(^|/)\\.?mise\\.toml$/",
         "/(^|/)\\.?mise/config\\.toml$/",
-        "/(^|/)\\.?mise/conf\\.d/.+\\.toml$/"
+        "/(^|/)\\.?mise/conf\\.d/.+\\.toml(\\.tmpl)?$/"
       ],
       "matchStrings": [
         "\"github:(?<depName>[^\"]+)\"\\s*=\\s*\"(?<currentValue>[^\"]+)\""
