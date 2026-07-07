@@ -32,4 +32,9 @@ eval "$(mise activate bash)"
 eval "$(starship init bash)"
 {{- end }}
 
+{{ $path := printf "%s_extra" .chezmoi.targetFile }}
+{{- if stat $path }}
+{{ include $path }}
+{{- end }}
+
 {{- end }}
