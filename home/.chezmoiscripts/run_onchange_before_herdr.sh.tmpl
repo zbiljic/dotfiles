@@ -1,0 +1,117 @@
+{{ if and .extras (or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux")) -}}
+{{ $herdrConfig := includeTemplate "private_dot_config/mise/conf.d/tools.extra.toml.tmpl" . | fromToml -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Herdr version: {{ $herdrConfig.env.HERDR_VERSION | trimPrefix "v" }}
+EXPECTED_VERSION="{{ $herdrConfig.env.HERDR_VERSION | trimPrefix "v" }}"
+INSTALL_DIR="${HERDR_INSTALL_DIR:-${HOME}/.local/bin}"
+HERDR_BIN="${INSTALL_DIR}/herdr"
+
+version_of() {
+    "$1" --version 2>/dev/null | awk '{ print $2 }'
+}
+
+install_from_release() {
+    local os arch asset url tmp tag
+
+    case "$(uname -s)" in
+        Darwin) os="macos" ;;
+        Linux) os="linux" ;;
+        *) echo "unsupported OS for Herdr: $(uname -s)" >&2; exit 1 ;;
+    esac
+
+    case "$(uname -m)" in
+        x86_64|amd64) arch="x86_64" ;;
+        arm64|aarch64) arch="aarch64" ;;
+        *) echo "unsupported architecture for Herdr: $(uname -m)" >&2; exit 1 ;;
+    esac
+
+    asset="herdr-${os}-${arch}"
+    tmp="$(mktemp -d)"
+
+    for tag in "v${EXPECTED_VERSION}" "${EXPECTED_VERSION}"; do
+        url="https://github.com/ogulcancelik/herdr/releases/download/${tag}/${asset}"
+        if curl -fsSL --retry 3 --connect-timeout 10 --max-time 120 "${url}" -o "${tmp}/herdr"; then
+            install -m 0755 "${tmp}/herdr" "${HERDR_BIN}"
+            rm -rf "${tmp}"
+            return
+        fi
+    done
+
+    rm -rf "${tmp}"
+    echo "failed to install Herdr ${EXPECTED_VERSION}" >&2
+    exit 1
+}
+
+find_existing_herdr() {
+    local path
+
+    path="$(command -v herdr || true)"
+    if [[ -z "${path}" ]]; then
+        return
+    fi
+
+    if [[ "${path}" == */mise/shims/herdr ]] && command -v mise >/dev/null 2>&1; then
+        mise which herdr 2>/dev/null || printf '%s\n' "${path}"
+    else
+        printf '%s\n' "${path}"
+    fi
+}
+
+seed_direct_install() {
+    local source_bin="$1"
+
+    if [[ "${source_bin}" == "${HERDR_BIN}" ]]; then
+        return
+    fi
+
+    if [[ "${source_bin}" == */mise/shims/herdr ]]; then
+        install_from_release
+    else
+        install -m 0755 "${source_bin}" "${HERDR_BIN}"
+    fi
+}
+
+mkdir -p "${INSTALL_DIR}"
+
+current_version=""
+if [[ -x "${HERDR_BIN}" ]]; then
+    current_version="$(version_of "${HERDR_BIN}" || true)"
+fi
+
+if [[ "${current_version}" == "${EXPECTED_VERSION}" ]]; then
+    exit 0
+fi
+
+if [[ -x "${HERDR_BIN}" ]]; then
+    "${HERDR_BIN}" update --handoff
+else
+    existing_herdr="$(find_existing_herdr)"
+
+    if [[ -n "${existing_herdr}" ]]; then
+        existing_version="$(version_of "${existing_herdr}" || true)"
+
+        if [[ "${existing_version}" != "${EXPECTED_VERSION}" ]]; then
+            "${existing_herdr}" update --handoff
+            existing_version="$(version_of "${existing_herdr}" || true)"
+        fi
+
+        if [[ "${existing_version}" != "${EXPECTED_VERSION}" ]]; then
+            echo "Herdr updater installed ${existing_version:-unknown}, expected ${EXPECTED_VERSION}" >&2
+            exit 1
+        fi
+
+        seed_direct_install "${existing_herdr}"
+    else
+        install_from_release
+    fi
+fi
+
+actual_version="$(version_of "${HERDR_BIN}" || true)"
+if [[ "${actual_version}" != "${EXPECTED_VERSION}" ]]; then
+    echo "Herdr ${actual_version:-unknown} is installed at ${HERDR_BIN}, expected ${EXPECTED_VERSION}" >&2
+    exit 1
+fi
+{{ end -}}
