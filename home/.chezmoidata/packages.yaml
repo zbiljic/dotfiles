@@ -1,0 +1,54 @@
+packages:
+  darwin:
+    base:
+      taps: []
+
+      brews:
+        - bash
+        - dockutil
+        - eza
+        - git-lfs
+        - git
+        - go
+        - hstr
+        - jq
+        - macmon
+        - mediainfo
+        - mole
+        - rsync
+        - wget
+
+      casks:
+        system:
+          - font-jetbrains-mono-nerd-font
+          - visual-studio-code
+
+        user:
+          - aware
+          - fork
+          - ghostty
+          - jordanbaird-ice
+          - keepingyouawake
+          - maccy
+          - rectangle
+          - stats
+          - stolendata-mpv
+          - wezterm
+
+    arm64:
+      brews:
+        - fd
+        - ripgrep
+
+    personal:
+      casks:
+        system:
+          - tailscale-app
+
+        user:
+          - airflow
+          - fsnotes
+          - glide-browser
+          - google-chrome@dev
+          - helium-browser
+          - keepassxc

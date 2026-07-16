@@ -9,62 +9,18 @@ if ! command -v brew > /dev/null 2>&1; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-{{ $taps := list
--}}
-
-{{ $brews := list
-    "bash"
-    "dockutil"
-    "eza"
-    "git-lfs"
-    "git"
-    "go"
-    "hstr"
-    "jq"
-    "macmon"
-    "mediainfo"
-    "mole"
-    "rsync"
-    "wget"
--}}
-
-{{ $casks_system := list
-    "font-jetbrains-mono-nerd-font"
-    "visual-studio-code"
--}}
-
-{{ $casks_user := list
-    "aware"
-    "fork"
-    "ghostty"
-    "jordanbaird-ice"
-    "keepingyouawake"
-    "maccy"
-    "rectangle"
-    "stats"
-    "stolendata-mpv"
-    "wezterm"
--}}
+{{ $taps := .packages.darwin.base.taps -}}
+{{ $brews := .packages.darwin.base.brews -}}
+{{ $casks_system := .packages.darwin.base.casks.system -}}
+{{ $casks_user := .packages.darwin.base.casks.user -}}
 
 {{ if (eq .chezmoi.arch "arm64") -}}
-{{   $brews = concat $brews (list
-       "fd"
-       "ripgrep"
-     ) -}}
+{{   $brews = concat $brews .packages.darwin.arm64.brews -}}
 {{ end -}}
 
 {{ if .personal -}}
-{{   $casks_user = concat $casks_user (list
-       "airflow"
-       "fsnotes"
-       "glide-browser"
-       "google-chrome@dev"
-       "helium-browser"
-       "keepassxc"
-     ) -}}
-{{   $casks_system = concat $casks_system (list
-       "tailscale-app"
-     ) -}}
+{{   $casks_user = concat $casks_user .packages.darwin.personal.casks.user -}}
+{{   $casks_system = concat $casks_system .packages.darwin.personal.casks.system -}}
 {{ end -}}
 
 mkdir -p "$HOME/Applications"
