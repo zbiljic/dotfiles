@@ -27,12 +27,12 @@ packages:
           - aware
           - fork
           - ghostty
-          - jordanbaird-ice
           - keepingyouawake
           - maccy
           - rectangle
           - stats
           - stolendata-mpv
+          - thaw
           - wezterm
 
     arm64:
