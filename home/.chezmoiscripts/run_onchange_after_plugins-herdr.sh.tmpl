@@ -1,0 +1,93 @@
+{{ if and .extras (or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux")) -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+INSTALL_DIR="${HERDR_INSTALL_DIR:-${HOME}/.local/bin}"
+HERDR_BIN="${INSTALL_DIR}/herdr"
+
+if [[ ! -x "${HERDR_BIN}" ]]; then
+    echo "herdr not found at ${HERDR_BIN}" >&2
+    exit 1
+fi
+
+if command -v node >/dev/null 2>&1; then
+    NODE_CMD=(node)
+elif command -v mise >/dev/null 2>&1; then
+    NODE_CMD=(mise exec -- node)
+elif [[ -x "${HOME}/.local/czbin/mise" ]]; then
+    NODE_CMD=("${HOME}/.local/czbin/mise" exec -- node)
+else
+    echo "node not found; run the mise install step before installing Herdr plugins" >&2
+    exit 1
+fi
+
+plugin_is_current() {
+    local plugin_id="$1"
+    local plugin_source="$2"
+    local plugin_ref="$3"
+    local response
+
+    if ! response="$("${HERDR_BIN}" plugin list --plugin "${plugin_id}" --json 2>/dev/null)"; then
+        return 1
+    fi
+
+    EXPECTED_PLUGIN_ID="${plugin_id}" \
+    EXPECTED_PLUGIN_SOURCE="${plugin_source}" \
+    EXPECTED_PLUGIN_REF="${plugin_ref}" \
+        "${NODE_CMD[@]}" -e '
+let input = "";
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", chunk => input += chunk);
+process.stdin.on("end", () => {
+    try {
+        const payload = JSON.parse(input);
+        const plugins = payload?.result?.plugins ?? [];
+        const plugin = plugins.find(entry => entry.plugin_id === process.env.EXPECTED_PLUGIN_ID);
+        const [owner, repo, ...subdirParts] = process.env.EXPECTED_PLUGIN_SOURCE.split("/");
+        const expectedSubdir = subdirParts.join("/");
+        const source = plugin?.source;
+        const current = plugin?.enabled === true
+            && source?.kind === "github"
+            && source?.owner === owner
+            && source?.repo === repo
+            && (source?.subdir ?? "") === expectedSubdir
+            && source?.requested_ref === process.env.EXPECTED_PLUGIN_REF;
+        process.exit(current ? 0 : 1);
+    } catch {
+        process.exit(1);
+    }
+});
+' <<<"${response}"
+}
+
+install_plugin() {
+    local plugin_id="$1"
+    local plugin_source="$2"
+    local plugin_ref="$3"
+    local attempt
+
+    if plugin_is_current "${plugin_id}" "${plugin_source}" "${plugin_ref}"; then
+        echo "Herdr plugin ${plugin_id}@${plugin_ref} is already installed"
+        return
+    fi
+
+    for attempt in 1 2 3; do
+        if "${HERDR_BIN}" plugin install "${plugin_source}" --ref "${plugin_ref}" --yes \
+            && plugin_is_current "${plugin_id}" "${plugin_source}" "${plugin_ref}"; then
+            return
+        fi
+
+        if [[ "${attempt}" -lt 3 ]]; then
+            sleep $((attempt * 2))
+        fi
+    done
+
+    echo "failed to install Herdr plugin ${plugin_source}@${plugin_ref}" >&2
+    return 1
+}
+
+{{ range .herdr.plugins -}}
+install_plugin {{ .id | quote }} {{ .source | quote }} {{ .ref | quote }}
+{{ end -}}
+{{ end -}}
