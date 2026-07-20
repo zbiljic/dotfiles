@@ -6,6 +6,20 @@
 {{- $extras := false -}}{{/* true if optional extras should be installed */}}
 {{- "" -}}
 
+{{/* restore existing configuration */}}
+{{- if hasKey . "ephemeral" -}}
+{{-   $ephemeral = .ephemeral -}}
+{{- end -}}
+{{- if hasKey . "headless" -}}
+{{-   $headless = .headless -}}
+{{- end -}}
+{{- if hasKey . "kubernetes" -}}
+{{-   $kubernetes = .kubernetes -}}
+{{- end -}}
+{{- if hasKey . "personal" -}}
+{{-   $personal = .personal -}}
+{{- end -}}
+
 {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
 {{-   $ephemeral = true -}}
