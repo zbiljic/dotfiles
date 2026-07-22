@@ -22,5 +22,17 @@ split_vertical = ["prefix+v", "cmd+d"]
 split_horizontal = ["prefix+minus", "cmd+shift+d"]
 zoom = ["prefix+z", "cmd+shift+enter"]
 
+[[keys.command]]
+key = "ctrl+shift+a"
+type = "plugin_action"
+command = "termscope.open"
+description = "visible-screen file picker"
+
+[[keys.command]]
+key = "ctrl+e"
+type = "plugin_action"
+command = "termscope.open-links"
+description = "visible-screen link picker"
+
 [ui]
 prompt_new_tab_name = false

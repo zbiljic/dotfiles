@@ -5,3 +5,9 @@ id = "dev-shimada.auto-tab-name"
 source = "dev-shimada/herdr-auto-tab-name"
 # renovate: datasource=github-releases depName=dev-shimada/herdr-auto-tab-name
 ref = "v1.0.2"
+
+[[herdr.plugins]]
+id = "termscope"
+source = "iurysza/termscope"
+# renovate: datasource=github-releases depName=iurysza/termscope
+ref = "v0.2.0"
