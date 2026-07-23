@@ -29,7 +29,7 @@ command = "termscope.open"
 description = "visible-screen file picker"
 
 [[keys.command]]
-key = "ctrl+e"
+key = "ctrl+shift+e"
 type = "plugin_action"
 command = "termscope.open-links"
 description = "visible-screen link picker"
