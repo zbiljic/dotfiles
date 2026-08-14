@@ -51,6 +51,7 @@ GEMINI.md
 .taskmaster/
 .taskmasterconfig
 .windsurfrules
+.worktreeinclude
 clinerules-bank/
 docs/plans/
 opencode.json
