@@ -1,5 +1,5 @@
 {{ if and .extras (or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux")) -}}
-{{ $herdrConfig := includeTemplate "private_dot_config/mise/conf.d/tools.extra.toml.tmpl" . | fromToml -}}
+{{ $herdrConfig := includeTemplate "private_dot_config/mise/conf.d/tools_extra.toml.tmpl" . | fromToml -}}
 #!/usr/bin/env bash
 
 set -euo pipefail
