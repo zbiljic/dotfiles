@@ -5,9 +5,18 @@ macos-option-as-alt = left
 
 copy-on-select = clipboard
 
+# Unbind default Alt keybindings
 keybind = alt+left=unbind
 keybind = alt+right=unbind
+
+# Send a newline
 keybind = shift+enter=text:\n
+
+# Navigate splits
+keybind = performable:super+alt+arrow_up=goto_split:up
+keybind = performable:super+alt+arrow_down=goto_split:down
+keybind = performable:super+alt+arrow_left=goto_split:left
+keybind = performable:super+alt+arrow_right=goto_split:right
 
 {{ $path := printf "%s_extra" .chezmoi.targetFile }}
 {{- if stat $path -}}
