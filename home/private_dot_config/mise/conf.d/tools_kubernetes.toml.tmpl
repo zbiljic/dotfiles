@@ -1,6 +1,6 @@
 {{ if .kubernetes -}}
 [tools]
-k9s = "0.51.0"
+k9s = { version = "latest", auto_update = true }
 
-"github:janosmiko/lfk" = "v0.19.5"
+"github:janosmiko/lfk" = { version = "latest", auto_update = true }
 {{ end -}}

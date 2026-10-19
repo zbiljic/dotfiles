@@ -1,2 +1,2 @@
 [tools]
-node = 'lts'
+node = { version = "lts", auto_update = true }
