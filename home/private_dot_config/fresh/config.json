@@ -1,0 +1,24 @@
+{
+  "file_explorer": {
+    "show_hidden": true,
+    "show_gitignored": true
+  },
+  "editor": {
+    "line_numbers": true,
+    "whitespace_spaces_trailing": true
+  },
+  "theme": "builtin://high-contrast",
+  "auto_attach": false,
+  "self_update": false,
+  "plugins": {
+    "welcome_screen": {
+      "settings": {
+        "showOnStartup": false
+      }
+    }
+  },
+  "check_for_updates": false,
+  "file_browser": {
+    "show_hidden": true
+  }
+}
